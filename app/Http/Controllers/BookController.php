@@ -13,9 +13,8 @@ class BookController extends Controller
     public function index()
     {
         $books = Books::all();
-        return view('admin.books.create', compact('books'));
+        return view('admin.books.index', compact('books'));
     }
-
     /**
      * Show the form for creating a new resource.
      */
@@ -53,7 +52,7 @@ class BookController extends Controller
             'stock' => $request->stock,
             'image' => $imagePath,
         ]);
-
+        
         return redirect()->route('admin.books.index')->with('success', 'Book created successfully!');
         } catch (\Exception $e) {
             return back()->withErrors(['error' => 'Failed to create book: ' . $e->getMessage()]);
