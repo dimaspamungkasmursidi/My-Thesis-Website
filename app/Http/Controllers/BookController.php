@@ -103,7 +103,12 @@ class BookController extends Controller
     public function destroy(string $id)
     {
         $book = Books::findOrFail($id);
+        
+        if ($book->image){
+            unlink(storage_path('app/public/' . $book->image));
+        }
+
         $book->delete();
-        return redirect()->route('admin.books.index')->with('success', 'Book deleted successfully!');
+        return redirect()->route('books.index')->with('success', 'Book deleted successfully');
     }
 }

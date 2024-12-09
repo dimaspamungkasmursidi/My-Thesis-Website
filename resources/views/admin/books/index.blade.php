@@ -46,11 +46,13 @@
                     @endif
                 </td>
                 <td class="border-2 border-black px-8 py-2">
-                    <a href="#" class="border bg-yellow-400 px-4 py-2 rounded-md my-8">Edit</a>
-                    <form action="#" method="POST" style="display:inline">
+
+                    <a href="{{ route('books.edit', $book->id) }}" class="border bg-yellow-400 px-4 py-2 rounded-md my-8">Edit</a>
+                    
+                    <form action="{{ route('books.destroy', $book->id) }}" method="POST" style="display:inline">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="border bg-red-600 px-4 py-2 rounded-md my-8">Delete</button>
+                        <button type="submit" class="border bg-red-600 px-4 py-2 rounded-md my-8" onclick="return confirm('Are you sure want to delete this book?')">Delete</button>
                     </form>
                 </td>
             </tr>

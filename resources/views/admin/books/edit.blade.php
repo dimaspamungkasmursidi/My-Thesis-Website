@@ -12,6 +12,7 @@
                 <legend class="text-xl font-semibold text-gray-200 mb-1">Edit Book</legend>
                 <p class="text-sm text-gray-400">Update book details in the library</p>
             </div>
+
             <!-- Image -->
             <div>
                 <label for="image" class="block text-sm font-medium text-gray-800 dark:text-gray-200">Book Image</label>
@@ -20,12 +21,14 @@
                 <img src="/path/to/existing-image.jpg" alt="Book Image Preview"
                     class="w-32 h-32 mt-4 rounded-md object-cover border-2 border-gray-500">
             </div>
+
             <!-- Title -->
             <div>
                 <label for="title" class="block text-sm font-medium text-gray-800 dark:text-gray-200">Title</label>
                 <input type="text" id="title" name="title" value="Existing Book Title" required
                     class="mt-1 block w-full rounded-md bg-gray-900 border-gray-500 text-gray-800 dark:text-gray-200 shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
             </div>
+            
             <!-- Description -->
             <div>
                 <label for="description" class="block text-sm font-medium text-gray-800 dark:text-gray-200">Description</label>
