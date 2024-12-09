@@ -13,7 +13,7 @@
     @endif
 
     <div class="my-5">
-    <a href="{{ route('admin.books.create') }}" class="border bg-purple-600 px-4 py-2 rounded-md my-8">Add New Book</a>
+    <a href="{{ route('books.create') }}" class="border bg-purple-600 px-4 py-2 rounded-md my-8">Add New Book</a>
     </div>
 
     <table class="table-auto border-2">
