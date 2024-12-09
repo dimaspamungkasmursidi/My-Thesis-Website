@@ -6,12 +6,34 @@
     </x-slot>
 
     <section class="container mx-auto sm:p-8 sm:pt-12">
-        <form class="bg-gray-800 p-8 sm:rounded-lg shadow-lg space-y-4">
+
+
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
+
+            @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+            @endif
+
+
+        <form action="{{ route('books.store') }}" method="POST" enctype="multipart/form-data" class="bg-gray-800 p-8 sm:rounded-lg shadow-lg space-y-4">
+            @csrf
             <!-- Title Section -->
             <div>
                 <legend class="text-xl font-semibold text-gray-200 mb-1">Add New Book</legend>
                 <p class="text-sm text-gray-400">Add a new book to the library</p>
             </div>
+
+
             <!-- Image -->
             <div>
                 <label for="image" class="block text-sm font-medium text-gray-800 dark:text-gray-200">Book Image</label>
