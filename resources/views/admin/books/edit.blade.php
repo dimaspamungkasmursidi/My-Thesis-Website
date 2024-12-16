@@ -1,12 +1,31 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+        <h2 class="font-semibold text-xl text-gray-200 leading-tight">
             {{ __('Edit Book') }}
         </h2>
     </x-slot>
 
+
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+
     <section class="container mx-auto sm:p-8 sm:pt-12">
-        <form class="bg-gray-800 p-8 sm:rounded-lg shadow-lg space-y-4">
+        <form action="{{ route('books.update', $book->id) }}" method="POST" class="bg-gray-800 p-8 sm:rounded-lg shadow-lg space-y-4">
+            @csrf
+            @method('PUT')
             <!-- Title Section -->
             <div>
                 <legend class="text-xl font-semibold text-gray-200 mb-1">Edit Book</legend>
@@ -15,55 +34,58 @@
 
             <!-- Image -->
             <div>
-                <label for="image" class="block text-sm font-medium text-gray-800 dark:text-gray-200">Book Image</label>
+                <label for="image" class="block text-sm font-medium text-gray-200">Book Image</label>
                 <input type="file" id="image" name="image"
-                    class="mt-1 block w-full text-sm text-gray-800 dark:text-gray-200 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border file:text-gray-200 file:border-gray-500 file:text-sm file:bg-gray-700 file:hover:bg-gray-600 file:duration-300 file:ease-in-out">
-                <img src="/path/to/existing-image.jpg" alt="Book Image Preview"
-                    class="w-32 h-32 mt-4 rounded-md object-cover border-2 border-gray-500">
+                    class="mt-1 block w-full text-sm text-gray-200 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border file:text-gray-200 file:border-gray-500 file:text-sm file:bg-gray-700 file:hover:bg-gray-600 file:duration-300 file:ease-in-out">
+                    @if ($book->image)
+                        <img src="{{ asset('storage/' . $book->image) }}" alt="Book Image Preview"
+                        class="w-32 h-32 mt-4 rounded-md object-cover border-2 border-indigo-500">
+                    @endif
+                    {{-- <img src="/path/to/existing-image.jpg" alt="Book Image Preview"
+                    class="w-32 h-32 mt-4 rounded-md object-cover border-2 border-gray-500"> --}}
             </div>
 
             <!-- Title -->
             <div>
-                <label for="title" class="block text-sm font-medium text-gray-800 dark:text-gray-200">Title</label>
-                <input type="text" id="title" name="title" value="Existing Book Title" required
-                    class="mt-1 block w-full rounded-md bg-gray-900 border-gray-500 text-gray-800 dark:text-gray-200 shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                <label for="title" class="block text-sm font-medium text-gray-200">Title</label>
+                <input type="text" id="title" name="title" value={{ $book->title }} required
+                    class="mt-1 block w-full rounded-md bg-gray-900 border-gray-500 text-gray-200 shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
             </div>
-            
+
             <!-- Description -->
             <div>
-                <label for="description" class="block text-sm font-medium text-gray-800 dark:text-gray-200">Description</label>
+                <label for="description" class="block text-sm font-medium text-gray-200">Description</label>
                 <textarea id="description" name="description" rows="4"
-                    class="mt-1 block w-full rounded-md bg-gray-900 border-gray-500 text-gray-800 dark:text-gray-200 shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">Existing description of the book</textarea>
+                    class="mt-1 block w-full rounded-md bg-gray-900 border-gray-500 text-gray-200 shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">{{ $book->description }}</textarea>
             </div>
             <!-- Category -->
             <div>
-                <label for="category" class="block text-sm font-medium text-gray-800 dark:text-gray-200">Category</label>
-                <input type="text" id="category" name="category" value="Existing Category" required
-                    class="mt-1 block w-full rounded-md bg-gray-900 border-gray-500 text-gray-800 dark:text-gray-200 shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                <label for="category" class="block text-sm font-medium text-gray-200">Category</label>
+                <input type="text" id="category" name="category" value={{ $book->category }} required
+                    class="mt-1 block w-full rounded-md bg-gray-900 border-gray-500 text-gray-200 shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
             </div>
             <!-- Author -->
             <div>
-                <label for="author" class="block text-sm font-medium text-gray-800 dark:text-gray-200">Author</label>
-                <input type="text" id="author" name="author" value="Existing Author"
-                    class="mt-1 block w-full rounded-md bg-gray-900 border-gray-500 text-gray-800 dark:text-gray-200 shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                <label for="author" class="block text-sm font-medium text-gray-200">Author</label>
+                <input type="text" id="author" name="author" value={{ $book->author }} required
+                    class="mt-1 block w-full rounded-md bg-gray-900 border-gray-500 text-gray-200 shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
             </div>
             <!-- Year -->
             <div>
-                <label for="year" class="block text-sm font-medium text-gray-800 dark:text-gray-200">Year</label>
-                <input type="number" id="year" name="year" value="2023" required
-                    class="mt-1 block w-full rounded-md bg-gray-900 border-gray-500 text-gray-800 dark:text-gray-200 shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                <label for="year" class="block text-sm font-medium text-gray-200">Year</label>
+                <input type="number" id="year" name="year" value={{ $book->year }} required
+                    class="mt-1 block w-full rounded-md bg-gray-900 border-gray-500 text-gray-200 shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
             </div>
             <!-- Stock -->
             <div>
-                <label for="stock" class="block text-sm font-medium text-gray-800 dark:text-gray-200">Stock</label>
-                <input type="number" id="stock" name="stock" value="10" required
-                    class="mt-1 block w-full rounded-md bg-gray-900 border-gray-500 text-gray-800 dark:text-gray-200 shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                <label for="stock" class="block text-sm font-medium text-gray-200">Stock</label>
+                <input type="number" id="stock" name="stock" value={{ $book->stock }} required
+                    class="mt-1 block w-full rounded-md bg-gray-900 border-gray-500 text-gray-200 shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
             </div>
             <!-- Submit Button -->
-            <div class="pt-4">
-                <button type="submit"
-                    class="w-full bg-gray-300 text-gray-800 font-semibold py-2 px-4 rounded-lg shadow hover:bg-gray-400 hover:duration-300 hover:ease-in-out focus:outline-none focus:ring-2 focus:ring-gray-300">
-                    Save Changes
+            <div class="flex items-center justify-end mt-4">
+                <button type="submit" class="w-full bg-gradient-to-r from-purple-500 to-indigo-600 text-white font-semibold py-2 px-4 rounded-lg shadow hover:bg-gray-400 hover:duration-300 hover:ease-in-out focus:outline-none focus:ring-2 focus:ring-gray-300">
+                    Update Book
                 </button>
             </div>
         </form>
@@ -98,7 +120,7 @@
         const preview = document.createElement('img');
         preview.src = URL.createObjectURL(file);
         preview.alt = "Preview";
-        preview.className = "w-32 h-32 mt-4 rounded-md object-cover border-2 border-gray-500";
+        preview.className = "w-32 h-32 mt-4 rounded-md object-cover border-2 border-indigo-500";
         this.parentNode.appendChild(preview);
     });
     </script>

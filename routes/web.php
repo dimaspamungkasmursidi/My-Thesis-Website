@@ -1,23 +1,35 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\MemberRegistrationController;
+use App\Http\Controllers\MemberLoginController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/books/{book}', [BookController::class, 'show'])->name('books.show');
+
+Route::prefix('member')->group(function () {
+    Route::get('/register', [MemberRegistrationController::class, 'create'])->name('register.member');
+    Route::post('/register', [MemberRegistrationController::class, 'store']);
+});
+
+Route::get('/login-member', [MemberLoginController::class, 'create'])->name('login.member');
+Route::post('/login-member', [MemberLoginController::class, 'store']);
+Route::post('/logout-member', [MemberLoginController::class, 'destroy'])->name('logout.member');
+
+Route::post('/logout-member', [MemberLoginController::class, 'destroy'])->name('logout.member');
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
+
+
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware('auth:member')->name('dashboard');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

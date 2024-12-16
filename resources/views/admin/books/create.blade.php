@@ -16,13 +16,13 @@
                     @endforeach
                 </ul>
             </div>
-            @endif
+        @endif
 
-            @if (session('success'))
+        @if (session('success'))
             <div class="alert alert-success">
                 {{ session('success') }}
             </div>
-            @endif
+        @endif
 
 
         <form action="{{ route('books.store') }}" method="POST" enctype="multipart/form-data" class="bg-gray-800 p-8 sm:rounded-lg shadow-lg space-y-4">
@@ -87,37 +87,47 @@
     </section>
 
     <script>
-    document.getElementById('image').addEventListener('change', function(event) {
-        const file = event.target.files[0];
-        const errorText = this.parentNode.querySelector('.error-text');
+        document.getElementById('image').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            const errorText = this.parentNode.querySelector('.error-text');
 
-        // Reset error text
-        if (errorText) {
-            errorText.remove();
-        }
+            // Reset error text and preview
+            if (errorText) {
+                errorText.remove();
+            }
+            const existingPreview = this.parentNode.querySelector('img');
+            if (existingPreview) {
+                existingPreview.remove();
+            }
 
-        // Validasi tipe file
-        if (!file.type.startsWith('image/')) {
-            const error = document.createElement('p');
-            error.textContent = 'Please upload a valid image file.';
-            error.className = 'error-text text-sm text-red-500 mt-1';
-            this.parentNode.appendChild(error);
-            this.value = ''; // Reset input jika invalid
-            return;
-        }
+            // Validasi tipe file
+            if (!file.type.startsWith('image/')) {
+                const error = document.createElement('p');
+                error.textContent = 'Please upload a valid image file.';
+                error.className = 'error-text text-sm text-red-500 mt-1';
+                this.parentNode.appendChild(error);
+                this.value = ''; // Reset input jika invalid
+                return;
+            }
 
-        // Hapus preview lama jika ada
-        const existingPreview = this.parentNode.querySelector('img');
-        if (existingPreview) {
-            existingPreview.remove();
-        }
+            // Validasi ukuran file (maksimum 2 MB)
+            const maxSize = 2 * 1024 * 1024; // 2 MB dalam bytes
+            if (file.size > maxSize) {
+                const error = document.createElement('p');
+                error.textContent = 'File size exceeds the maximum limit of 2 MB.';
+                error.className = 'error-text text-sm text-red-500 mt-1';
+                this.parentNode.appendChild(error);
+                this.value = ''; // Reset input jika ukuran file terlalu besar
+                return;
+            }
 
-        const preview = document.createElement('img');
-        preview.src = URL.createObjectURL(file);
-        preview.alt = "Preview";
-        preview.className = "w-32 h-32 mt-4 rounded-md object-cover";
-        preview.style.border = "2px solid #000";
-        this.parentNode.appendChild(preview);
-    });
+            // Tampilkan preview gambar jika valid
+            const preview = document.createElement('img');
+            preview.src = URL.createObjectURL(file);
+            preview.alt = "Preview";
+            preview.className = "w-32 h-32 mt-4 rounded-md object-cover";
+            preview.style.border = "2px solid #000";
+            this.parentNode.appendChild(preview);
+        });
     </script>
 </x-app-layout>
