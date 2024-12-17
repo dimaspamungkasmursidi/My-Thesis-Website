@@ -6,6 +6,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\MemberRegistrationController;
 use App\Http\Controllers\Auth\MemberLoginController;
+use App\Http\Controllers\MemberProfileController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/books/{book}', [BookController::class, 'show'])->name('books.show');
@@ -19,6 +20,8 @@ Route::get('/login-member', [MemberLoginController::class, 'create'])->name('log
 Route::post('/login-member', [MemberLoginController::class, 'store']);
 Route::post('/logout-member', [MemberLoginController::class, 'destroy'])->name('logout.member');
 
+Route::get('/member/edit', [MemberProfileController::class, 'edit'])->name('member.edit');
+Route::post('/member/update', [MemberProfileController::class, 'update'])->name('member.update');
 
 
 Route::get('/dashboard', function () {
