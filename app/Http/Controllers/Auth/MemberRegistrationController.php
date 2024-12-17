@@ -16,26 +16,30 @@ class MemberRegistrationController extends Controller
 
     public function store(Request $request)
     {
-        // Validasi data input
-        $request->validate([
+        $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:members',
-            'password' => 'required|string|min:8|confirmed',
+            'email' => 'required|email|unique:members,email',
+            'password' => 'required|string|confirmed|min:8',
+            'whatsapp_number' => 'required|string|max:15|regex:/^[0-9+]*$/', // Validasi nomor WA
+            'address' => 'required|string|max:500',
+        ], [
+            'whatsapp_number.required' => 'Nomor WhatsApp wajib diisi.',
+            'whatsapp_number.regex' => 'Nomor WhatsApp hanya boleh mengandung angka dan tanda +.',
         ]);
 
-        // Simpan data anggota ke tabel 'members'
+        // Simpan data ke database
         Member::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'password' => bcrypt($validated['password']),
+            'whatsapp_number' => $validated['whatsapp_number'],
+            'address' => $validated['address'], // Tambahkan address
         ]);
 
         // Login otomatis setelah registrasi
-        auth()->guard('member')->attempt($request->only('email', 'password'));
+        // auth()->guard('member')->attempt($request->only('email', 'password'));
 
-        // Redirect ke halaman utama
-        return redirect()->route('home')->with('success', 'Registrasi berhasil!');
-        // return redirect()->route('register.member')->with('success', 'Registration successful!');
-
+        return redirect()->route('login.member')->with('status', 'Registration successful! Please login.');
     }
 }
+

@@ -11,10 +11,23 @@
         <div class="max-w-md w-full bg-white p-6 rounded-lg shadow-md">
             <h2 class="text-2xl font-bold text-center mb-6 text-gray-800">Login Member</h2>
 
+            {{-- Check if the user is logged in --}}
+            {{-- @if (Auth::guard('member')->check())
+                <h1 class="text-3xl font-bold text-gray-800">Selamat Datang, {{ Auth::guard('member')->user()->name }}!</h1>
+            @else
+                <h1 class="text-3xl font-bold text-gray-800">Selamat Datang!</h1>
+                <p class="text-gray-600 mt-4">Silakan login untuk melanjutkan.</p>
+            @endif --}}
+
+            @if (session('status'))
+                <div class="mb-4 text-green-600 text-sm">
+                    {{ session('status') }}
+                </div>
+            @endif
+
             @if ($errors->any())
                 <div class="mb-4">
-                    <div class="text-red-600 font-medium">Oops! Ada yang salah:</div>
-                    <ul class="mt-2 text-sm text-red-600">
+                    <ul class="text-red-600 text-sm">
                         @foreach ($errors->all() as $error)
                             <li>{{ $error }}</li>
                         @endforeach
@@ -26,20 +39,24 @@
                 @csrf
 
                 <div class="mb-4">
-                    <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                    <label for="email" class="block text-sm font-medium">Email</label>
                     <input type="email" name="email" id="email" value="{{ old('email') }}" required
-                        class="w-full mt-1 px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring focus:ring-blue-300">
+                           class="w-full px-3 py-2 border rounded-lg focus:ring focus:ring-blue-200">
                 </div>
 
                 <div class="mb-4">
-                    <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+                    <label for="password" class="block text-sm font-medium">Password</label>
                     <input type="password" name="password" id="password" required
-                        class="w-full mt-1 px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring focus:ring-blue-300">
+                           class="w-full px-3 py-2 border rounded-lg focus:ring focus:ring-blue-200">
+                </div>
+
+                <div class="mb-4 flex items-center">
+                    <input type="checkbox" name="remember" id="remember" class="mr-2">
+                    <label for="remember" class="text-sm">Remember Me</label>
                 </div>
 
                 <div>
-                    <button type="submit"
-                        class="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300">
+                    <button type="submit" class="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-500">
                         Login
                     </button>
                 </div>

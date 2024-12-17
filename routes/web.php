@@ -5,7 +5,7 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\MemberRegistrationController;
-use App\Http\Controllers\MemberLoginController;
+use App\Http\Controllers\Auth\MemberLoginController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/books/{book}', [BookController::class, 'show'])->name('books.show');
@@ -18,12 +18,6 @@ Route::prefix('member')->group(function () {
 Route::get('/login-member', [MemberLoginController::class, 'create'])->name('login.member');
 Route::post('/login-member', [MemberLoginController::class, 'store']);
 Route::post('/logout-member', [MemberLoginController::class, 'destroy'])->name('logout.member');
-
-Route::post('/logout-member', [MemberLoginController::class, 'destroy'])->name('logout.member');
-
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
 
 
 

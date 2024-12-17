@@ -27,7 +27,7 @@
             @csrf
 
             <div class="mb-4">
-                <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+                <label for="name" class="bl ock text-sm font-medium text-gray-700">Name</label>
                 <input type="text" name="name" id="name" value="{{ old('name') }}" required autofocus
                     class="w-full px-4 py-2 mt-1 border border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-blue-300 focus:outline-none">
             </div>
@@ -51,16 +51,17 @@
             </div>
 
             <div class="mb-4">
-                <label for="photo" class="block text-sm font-medium text-gray-700">Profile Photo (optional)</label>
-                <input type="file" name="photo" id="photo" accept="image/*" required
-                    class="w-full px-4 py-2 mt-1 border border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-blue-300 focus:outline-none">
-            </div>
-
-            <div class="mb-4">
                 <label for="whatsapp_number" class="block text-sm font-medium text-gray-700">WhatsApp Number</label>
                 <input type="text" name="whatsapp_number" id="whatsapp_number" required value="{{ old('whatsapp_number') }}"
                     class="w-full px-4 py-2 mt-1 border border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-blue-300 focus:outline-none"
                     placeholder="e.g., +62 812 3456 7890">
+            </div>
+
+            <div class="mb-4">
+                <label for="address" class="block text-sm font-medium text-gray-700">Address</label>
+                <textarea name="address" id="address" rows="3" required
+                    class="w-full px-4 py-2 mt-1 border border-gray-300 rounded-lg shadow-sm focus:ring focus:ring-blue-300 focus:outline-none"
+                    placeholder="Enter your address">{{ old('address') }}</textarea>
             </div>
 
             <div>
@@ -73,7 +74,7 @@
 
         <p class="text-center text-gray-600 mt-6 text-sm">
             Already have an account?
-            <a href="{{ route('login') }}" class="text-blue-500 font-medium hover:underline">Log in</a>
+            <a href="{{ route('login.member') }}" class="text-blue-500 font-medium hover:underline">Log in</a>
         </p>
     </div>
 </body>

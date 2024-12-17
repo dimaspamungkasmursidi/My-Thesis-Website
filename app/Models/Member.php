@@ -13,6 +13,8 @@ class Member extends Authenticatable
         'name',
         'email',
         'password',
+        'whatsapp_number',
+        'address',
     ];
 
     protected $hidden = [

@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
-            $table->string('address')->nullable();
-            $table->string('phone')->nullable();
+            $table->string('whatsapp_number', 15); // Nomor WhatsApp (wajib diisi)
+            $table->string('address'); // Alamat (wajib diisi)
             $table->timestamps();
         });
     }

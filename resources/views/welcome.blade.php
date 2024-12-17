@@ -23,9 +23,9 @@
         <div class="container mx-auto flex justify-between items-center">
             <a href="#" class="text-2xl font-bold">Babelan Knowledge Hub</a>
             <nav class="space-x-4">
-                <a href="#features" class="hover:text-gray-400">Features</a>
-                <a href="#books" class="hover:text-gray-400">Books</a>
-                <a href="#books" class="hover:text-gray-400">Categories</a>
+                <a href="{{ route('register.member') }}" class="text-gray-200 hover:text-gray-400">
+                    <button type="button" class="border border-gray-300 rounded-md px-4 py-2">Register</button>
+                </a>
             </nav>
         </div>
     </header>
@@ -53,12 +53,15 @@
         </div>
     </section>
 
-    @if (Auth::guard('member')->check())
-        <h1 class="text-3xl font-bold text-gray-800">Selamat Datang, {{ Auth::guard('member')->user()->name }}!</h1>
-    @else
-        <h1 class="text-3xl font-bold text-gray-800">Selamat Datang!</h1>
-        <p class="text-gray-600 mt-4">Silakan login untuk melanjutkan.</p>
-    @endif
+
+    <div class="text-center">
+        <h1 class="text-4xl font-bold mb-4">Welcome to the Home Page!</h1>
+        @auth
+            <p class="text-xl">Hello, {{ auth()->user()->name }}! You are logged in.</p>
+        @else
+            <p class="text-xl">Please <a href="{{ route('login.member') }}" class="text-blue-500">login</a> or <a href="{{ route('register.member') }}" class="text-blue-500">register</a>.</p>
+        @endauth
+    </div>
 
     <!-- Features Section -->
     <section id="features" class="py-12 px-4 md:px-20 bg-gray-100">
