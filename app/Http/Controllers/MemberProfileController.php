@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MemberProfileController extends Controller
 {
@@ -14,32 +15,41 @@ class MemberProfileController extends Controller
     }
 
     public function update(Request $request)
-    {
-        $member = auth()->guard('member')->user();
+{
+    // Validasi input
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|unique:members,email,' . auth()->guard('member')->id(),
+        'password' => 'nullable|string|min:8|confirmed',
+        'whatsapp_number' => 'required|string|max:15|regex:/^[0-9+]*$/',
+        'address' => 'required|string|max:500',
+    ]);
 
-        $request->validate([
-            'name' => 'required|string',
-            'email' => 'required|email|unique:members,email,' . $member->id,
-            'password' => 'nullable|string|min:8|confirmed',
-            'password_confirmation' => 'nullable|string|min:8',
-            'whatsapp_number' => 'required|string|max:15|regex:/^[0-9+]*$/', // Validasi nomor WA
-            'address' => 'required|string|max:500',
-        ]);
+    // Ambil data member yang login
+    $member = auth()->guard('member')->user();
 
-        $member= auth()->guard('member')->user();
-
-
+    // Memastikan $member adalah objek Eloquent Member
+    if ($member instanceof \App\Models\Member) {
+        // Update data member menggunakan save()
         $member->name = $request->name;
         $member->email = $request->email;
         $member->whatsapp_number = $request->whatsapp_number;
         $member->address = $request->address;
-        if ($request->password) {
+
+        // Update password jika diisi
+        if ($request->filled('password')) {
             $member->password = bcrypt($request->password);
         }
 
-        $request->member()->save();
+        // Simpan perubahan ke database
+        $member->save();  // Menyimpan perubahan ke database
 
-        return redirect()->route('member.edit')->with('success', 'Profile updated successfully');
+        // Redirect dengan pesan sukses
+        return redirect()->route('member.edit')->with('success', 'Profile updated successfully.');
+    } else {
+        // Jika member tidak ditemukan
+        return redirect()->back()->with('error', 'User not found.');
+    }
 }
 
 }
