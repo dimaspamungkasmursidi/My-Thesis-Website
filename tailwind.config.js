@@ -12,7 +12,12 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                sans: ['Poppins', ...defaultTheme.fontFamily.sans],
+            },
+            colors: {
+                primary: '#3786EE',
+                secondary: '#967DF4',
+                tertiary: '#FBF4F4',
             },
         },
     },

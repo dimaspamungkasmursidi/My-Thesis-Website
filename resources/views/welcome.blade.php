@@ -6,8 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     @vite('resources/css/app.css')
     <title>My Library</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <style>
+    body {
+        overflow-x: hidden;
+    }
     .hero-section {
         background-image: url('images/bg1.jpg');
     }
@@ -17,80 +21,43 @@
         }
     }
 </style>
-<body class="bg-gray-100 text-gray-800">
+<body class="relative bg-tertiary font-sans overflow-x-hidden">
     <!-- Header -->
-    <header class="bg-gray-800 text-gray-200 py-4 px-4 md:px-20 shadow-lg">
-        <div class="container mx-auto flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold">Babelan Knowledge Hub</a>
-            <nav class="space-x-4">
-                <a href="{{ route('register.member') }}" class="text-gray-200 hover:text-gray-400">
-                    <button type="button" class="border border-gray-300 rounded-md px-4 py-2">Register</button>
-                </a>
-            </nav>
-        </div>
-    </header>
+    @include('layouts.navbar')
+
+    <!-- Blur Background Elements -->
+    <div class="absolute w-[30rem] h-[40rem] md:w-[40rem] md:h-[40rem] top-[-3rem] right-[-14rem] bg-primary/30 rounded-full blur-3xl -z-10"></div>
+    <div class="absolute w-[20rem] h-[30em] md:w-[30rem] md:h-[30rem] top-[2rem] right-[-12rem] bg-secondary/50 rounded-full blur-3xl -z-10"></div>
 
     <!-- Hero Section -->
-    <section class="relative bg-cover bg-center h-screen hero-section">
-        <!-- Overlay -->
-        <div class="absolute inset-0 bg-black bg-opacity-60"></div>
-
-        <!-- Content -->
-        <div class="relative z-10 flex flex-col items-center justify-center h-full text-center text-white py-12 px-4 md:px-20">
-            <div>
-                <img src="{{ asset('images/logobekasi.svg.png') }}" alt="" class="w-64">
-            </div>
-          <h1 class="text-4xl md:text-6xl font-bold leading-tight">Sistem Informasi Perpustakaan Desa</h1>
-          <p class="mt-4 text-lg md:text-xl max-w-2xl">
-            Akses mudah untuk menemukan, meminjam, dan menikmati koleksi buku terbaik di desa Babelan Kota.
-            Jadikan membaca sebagai bagian dari kehidupan sehari-hari.
-          </p>
-          <div class="mt-6 flex">
-            <a href="index.html" class="bg-yellow-500 text-black font-semibold py-3 px-6 rounded-lg shadow-lg hover:bg-yellow-600 transition duration-300">
-              Cari Buku
-            </a>
-          </div>
+    <section class="flex flex-col-reverse md:flex-row items-center justify-center py-28 px-4 md:px-20">
+        <div class="md:w-1/2">
+            <h1 class="hidden md:block text-5xl font-bold text-center md:text-left mb-2">Sistem Informasi Perpustakaan <br> <span class="text-primary">Desa Babelan Kota</span></h1>
+            <p class="text-lg text-center md:text-left text-gray-600 leading-relaxed mb-4">Nikmati Kemudahan Mencari Buku. Akses Informasi Koleksi dan Booking Sebelum Berkunjung.</p>
+            <form action="">
+                <div class="flex items-center justify-center md:justify-start">
+                    <input type="text" placeholder="Cari buku" class="w-full md:w-1/2 px-4 py-2 rounded-l-md border border-gray-300 focus:outline-none focus:border-primary">
+                    <button type="submit" class="px-4 py-2 bg-primary text-white rounded-r-md hover:bg-tertiary">Cari</button>
+                </div>
+            </form>
+        </div>
+        <div class="md:w-1/2 flex-shrink-0">
+            <h1 class="md:hidden text-3xl font-bold text-center md:text-left mb-8">Sistem Informasi Perpustakaan <br> <span class="text-primary">Desa Babelan Kota</span></h1>
+            <img src="{{ asset('images/hero.png') }}" alt="Cover" class="mb-4 md:mb-0">
         </div>
     </section>
 
+    <!-- Blur Background Elements -->
+    <div class="absolute w-[30rem] h-[40rem] md:w-[40rem] md:h-[40rem] top-[45rem] left-[-14rem] md:top-[35rem] md:left-[-14rem] bg-secondary/40 rounded-full blur-3xl -z-10"></div>
+    <div class="absolute w-[20rem] h-[30em] md:w-[30rem] md:h-[30rem] top-[55rem] left-[-12rem] md:top-[45rem] md:left-[-12rem] bg-primary/40 rounded-full blur-3xl -z-10"></div>
 
-    <div class="text-center">
-        <h1 class="text-4xl font-bold mb-4">Welcome to the Home Page!</h1>
-        @auth
-            <p class="text-xl">Hello, {{ auth()->user()->name }}! You are logged in.</p>
-        @else
-            <p class="text-xl">Please <a href="{{ route('login.member') }}" class="text-blue-500">login</a> or <a href="{{ route('register.member') }}" class="text-blue-500">register</a>.</p>
-        @endauth
-    </div>
-
-    <!-- Features Section -->
-    <section id="features" class="py-12 px-4 md:px-20 bg-gray-100">
-        <div class="container mx-auto text-center">
-            <h2 class="text-3xl font-bold mb-6">Why Choose Us?</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="bg-white p-6 rounded-lg shadow">
-                    <h3 class="text-xl font-bold mb-2">Wide Collection</h3>
-                    <p>Explore a vast library of books from different genres and authors.</p>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow">
-                    <h3 class="text-xl font-bold mb-2">User Friendly</h3>
-                    <p>Enjoy a seamless and intuitive user experience.</p>
-                </div>
-                <div class="bg-white p-6 rounded-lg shadow">
-                    <h3 class="text-xl font-bold mb-2">Easy Access</h3>
-                    <p>Borrow or return books anytime, anywhere.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Books Section -->
+    <!-- Popular Books Section -->
     <section id="books" class="py-12 px-4 md:px-20">
         <div class="container mx-auto">
-            <h2 class="text-3xl font-bold mb-6 text-center">Books</h2>
+            <h2 class="text-3xl font-bold mb-6 text-center">Koleksi Buku Terfavorit</h2>
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
                 @forelse($books as $book)
-                    <div class=" flex flex-col items-start justify-between">
+                    <div class="flex flex-col items-start justify-between">
                         <div>
                             <div class="flex-shrink-0 overflow-hidden bg-slate-400 p-4 mb-2 flex flex-col items-center justify-center h-52 w-full rounded-md">
                                 <img src="{{ asset('storage/' . $book->image) }}" alt="{{ $book->title }}" class="w-full h-full object-contain object-center">
@@ -105,17 +72,20 @@
                             <a href="{{ route('books.show', $book->id) }}" class="bg-gray-700 text-gray-200 py-1 px-3 rounded-lg hover:bg-gray-600">Detail Buku</a>
                         </div>
                     </div>
-                    @empty
-                    <div class="flex flex-col items-center justify-center py-10">
-                        <div class="bg-slate-100 p-6 rounded-lg shadow-lg flex flex-col items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-gray-500 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
-                            </svg>
-                            <h2 class="text-lg font-semibold text-gray-700 mb-2">Oops! Tidak Ada Buku</h2>
-                            <p class="text-sm text-gray-500 mb-4 text-center">Kami tidak dapat menemukan buku di katalog saat ini. Silakan kembali nanti atau gunakan fitur pencarian.</p>
-                            <a href="{{ route('home') }}" class="bg-gray-700 text-gray-200 py-2 px-4 rounded-lg hover:bg-gray-600">Kembali ke Beranda</a>
-                        </div>
-                    </div>
+                @empty
+                    <!-- No Books Available -->
+                <div class="col-span-2 sm:col-span-3 md:col-span-4 lg:col-span-5 xl:col-span-6 flex flex-col items-center justify-center text-center py-12">
+                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 64 64" enable-background="new 0 0 64 64" class="w-80 h-80 mb-6">
+                        <circle cx="32" cy="32" r="23" fill="#fd3c4f"></circle><ellipse cx="32" cy="61" opacity=".3" rx="19" ry="3"></ellipse><path fill="#fff" d="M32,14c2.577,0,4.674-1.957,4.946-4.461C35.352,9.19,33.699,9,32,9 C19.297,9,9,19.297,9,32c0,1.699,0.19,3.352,0.539,4.946C12.044,36.674,14,34.577,14,32C14,22.075,22.075,14,32,14z" opacity=".3"></path><path fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="3" d="M15.047,23.427c1.878-3.699,4.932-6.705,8.666-8.522"></path><path d="M54.461,27.054C51.956,27.326,50,29.423,50,32c0,9.925-8.075,18-18,18 c-2.577,0-4.674,1.957-4.946,4.461C28.648,54.81,30.301,55,32,55c12.703,0,23-10.297,23-23C55,30.301,54.81,28.648,54.461,27.054z" opacity=".15"></path><circle cx="32" cy="32" r="16" fill="#37d0ee"></circle><rect width="8" height="43.841" x="28" y="10.08" fill="#fd3c4f" transform="rotate(45.001 32 32)"></rect>
+                    </svg>
+                    <h3 class="text-2xl font-bold text-gray-700 mb-2">Oops! Tidak Ada Buku Saat Ini</h3>
+                    <p class="text-gray-600 mb-4">
+                        Kami sedang memperbarui koleksi buku kami. Harap cek kembali nanti atau hubungi staf perpustakaan untuk informasi lebih lanjut.
+                    </p>
+                    <a href="{{ route('home') }}" class="bg-primary text-white py-2 px-5 rounded-lg hover:bg-secondary">
+                        Kembali ke Beranda
+                    </a>
+                </div>
                 @endforelse
             </div>
         </div>
@@ -127,5 +97,7 @@
             <p>&copy; 2024 My Library. All Rights Reserved.</p>
         </div>
     </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 </body>
 </html>

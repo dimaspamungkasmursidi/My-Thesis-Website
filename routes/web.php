@@ -22,6 +22,7 @@ Route::post('/logout-member', [MemberLoginController::class, 'destroy'])->name('
 
 Route::get('/member/edit', [MemberProfileController::class, 'edit'])->name('member.edit');
 Route::post('/member/update', [MemberProfileController::class, 'update'])->name('member.update');
+Route::get('/logout-member', [MemberProfileController::class, 'destroy'])->name('member.destroy');
 
 
 Route::get('/dashboard', function () {
@@ -38,7 +39,7 @@ Route::get('/books', function () {
 
 Route::middleware('auth')->group(function () {
 
-    Route::resource('books', BookController::class); // CRUD untuk
+    Route::resource('books', BookController::class);
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

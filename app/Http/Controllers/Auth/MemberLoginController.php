@@ -25,7 +25,7 @@ class MemberLoginController extends Controller
         // Proses login
         if (Auth::guard('member')->attempt($credentials, $request->boolean('remember'))) {
             $request->session()->regenerate();
-            
+
             return redirect()->intended('/'); // Arahkan ke halaman home
         }
 
@@ -33,5 +33,16 @@ class MemberLoginController extends Controller
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
         ])->onlyInput('email');
+    }
+
+    public function destroy(Request $request)
+    {
+        // Proses logout
+        Auth::guard('member')->logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/'); // Arahkan ke halaman home
     }
 }
