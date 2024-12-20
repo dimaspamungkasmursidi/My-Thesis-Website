@@ -35,7 +35,13 @@ Route::get('/dashboard', function () {
 
 Route::middleware('auth')->group(function () {
 
-    Route::resource('books', BookController::class); // CRUD untuk
+    // Route::resource('books', BookController::class); // CRUD untuk
+    Route::get('/books', [BookController::class, 'index'])->name('books.index');
+    Route::get('/books-create', [BookController::class, 'create'])->name('books.creates');
+    Route::post('/books', [BookController::class, 'store'])->name('books.store');
+    Route::get('/books/edit/{id}', [BookController::class, 'edit'])->name('books.edit');
+    Route::put('/books/update/{id}', [BookController::class, 'update'])->name('books.update');
+    Route::delete('/books/{id}', [BookController::class, 'destroy'])->name('books.destroy');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
