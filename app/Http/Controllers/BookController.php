@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Books;
+use App\Models\Book;
 use Illuminate\Http\Request;
 
 class BookController extends Controller
@@ -10,12 +10,12 @@ class BookController extends Controller
 
     public function index()
     {
-        $books = Books::all();
+        $books = Book::all();
         return view('admin.books.index', compact('books'));
     }
 
     public function create()
-    {
+    {   
         return view('admin.books.create');
     }
 
@@ -36,7 +36,7 @@ class BookController extends Controller
         }
 
         try {
-        $book = Books::create([
+        $book = Book::create([
             'title' => $request->title,
             'author' => $request->author,
             'category' => $request->category,
@@ -54,19 +54,19 @@ class BookController extends Controller
 
     public function show(string $id)
     {
-        $book = Books::findOrFail($id);
+        $book = Book::findOrFail($id);
         return view('bookDetail', compact('book'));
     }
 
     public function edit(string $id)
     {
-        $book  = Books::findOrFail($id);
+        $book  = Book::findOrFail($id);
         return view('admin.books.edit', compact('book'));
     }
 
     public function update(Request $request, string $id)
     {
-        $book = Books::findOrFail($id);
+        $book = Book::findOrFail($id);
 
         $request->validate([
             'title' => 'required|string|max:255',
@@ -100,7 +100,7 @@ class BookController extends Controller
 
     public function destroy(string $id)
     {
-        $book = Books::findOrFail($id);
+        $book = Book::findOrFail($id);
 
         if ($book->image){
             unlink(storage_path('app/public/' . $book->image));

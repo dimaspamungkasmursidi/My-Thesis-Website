@@ -16,7 +16,7 @@
     <section class="container mx-auto sm:p-8 sm:pt-12">
         <section class="bg-gray-800 p-8 sm:rounded-lg shadow-lg space-y-4">
             <div class="flex justify-start">
-                <a href="{{ route('books.create') }}"
+                <a href="{{ route('books.creates') }}"
                 class="inline-block bg-gradient-to-r from-purple-500 to-indigo-600 text-white font-semibold px-6 py-2 rounded-lg shadow-md hover:from-indigo-600 hover:to-purple-500 transition duration-300">
                     Add New Book
                 </a>
