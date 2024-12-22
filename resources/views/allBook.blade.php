@@ -5,20 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     @vite('resources/css/app.css')
-    <title>My Library</title>
+    <title>All Books</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <style>
     body {
         overflow-x: hidden;
-    }
-    .hero-section {
-        background-image: url('images/bg1.jpg');
-    }
-    @media screen and (max-width: 768px) {
-        .hero-section {
-            background-image: url('images/bg2.jpg');
-        }
     }
 </style>
 <body class="relative bg-tertiary font-sans overflow-x-hidden">
@@ -26,40 +18,35 @@
     @include('layouts.navbar')
 
     <!-- Blur Background Elements -->
-    <div class="absolute w-[30rem] h-[40rem] md:w-[40rem] md:h-[40rem] top-[-3rem] right-[-14rem] bg-primary/30 rounded-full blur-3xl -z-10 overflow-x-hidden"></div>
-    <div class="absolute w-[20rem] h-[30em] md:w-[30rem] md:h-[30rem] top-[2rem] right-[-12rem] bg-secondary/50 rounded-full blur-3xl -z-10 overflow-x-hidden"></div>
-
-    <!-- Hero Section -->
-    <section class="container mx-auto min-h-screen flex flex-col-reverse md:flex-row items-center justify-center px-4 md:px-20 overflow-x-hidden">
-        <div class="md:w-1/2">
-            <h1 class="hidden md:block text-5xl font-bold text-center md:text-left mb-2">Sistem Informasi Perpustakaan <br> <span class="text-primary">Desa Babelan Kota</span></h1>
-            <p class="text-lg text-center md:text-left text-gray-600 leading-relaxed mb-4">Nikmati Kemudahan Mencari Buku. Akses Informasi Koleksi dan Booking Sebelum Berkunjung.</p>
-            <form action="">
-                <div class="flex items-center justify-center md:justify-start">
-                    <input type="text" placeholder="Cari buku" class="w-full md:w-1/2 px-4 py-2 rounded-l-md border border-gray-300 focus:outline-none focus:border-primary">
-                    <button type="submit" class="px-4 py-2 bg-primary text-white rounded-r-md hover:bg-tertiary">Cari</button>
-                </div>
-            </form>
-        </div>
-        <div class="md:w-1/2 flex-shrink-0">
-            <h1 class="md:hidden text-4xl font-bold text-center md:text-left mb-8">Sistem Informasi Perpustakaan <br> <span class="text-primary">Desa Babelan Kota</span></h1>
-            <img src="{{ asset('images/hero.png') }}" alt="Cover" class="mb-4 md:mb-0">
-        </div>
-    </section>
-
-    <!-- Blur Background Elements -->
-    <div class="absolute w-[30rem] h-[40rem] md:w-[40rem] md:h-[40rem] top-[45rem] left-[-14rem] md:top-[35rem] md:left-[-14rem] bg-secondary/40 rounded-full blur-3xl -z-10"></div>
-    <div class="absolute w-[20rem] h-[30em] md:w-[30rem] md:h-[30rem] top-[55rem] left-[-12rem] md:top-[45rem] md:left-[-12rem] bg-primary/40 rounded-full blur-3xl -z-10"></div>
+    {{-- <div class="absolute w-[30rem] h-[40rem] md:w-[40rem] md:h-[40rem] top-[-3rem] left-[-14rem] bg-primary/30 rounded-full blur-3xl -z-10 overflow-x-hidden"></div>
+    <div class="absolute w-[20rem] h-[30em] md:w-[30rem] md:h-[30rem] top-[5rem] left-[-12rem] bg-secondary/40 rounded-full blur-3xl -z-10 overflow-x-hidden"></div> --}}
 
     <!-- Popular Books Section -->
-    <section id="books" class="pb-16 px-4 md:px-20">
+    <section class="py-16 px-4 md:px-20">
         <div class="container mx-auto">
-            <h2 class="text-3xl font-bold mb-6 text-center">Koleksi Buku Terfavorit</h2>
+            <div class="mb-8">
+                <div class="text-center">
+                    <h2 class="text-3xl font-bold mb-2">Semua Koleksi Buku</h2>
+                    <p class="hidden md:block text-gray-600 mb-4">
+                        Temukan berbagai buku yang kamu cari dengan mudah di koleksi kami. Eksplorasi buku berdasarkan
+                        kategori atau tema yang kamu sukai, dan temukan bacaan yang sempurna untuk menginspirasi dan
+                        memperkaya pengetahuanmu.
+                    </p>
+                    <p class="md:hidden text-gray-600 mb-4">
+                        Temukan berbagai buku yang kamu cari dengan mudah di koleksi kami. Kamu juga bisa mencari buku berdasarkan kategori.
+                    </p>
+                </div>
+                <div class="flex items-center justify-center mb-6">
+                    <input type="text" placeholder="Cari buku.." class="w-full md:w-1/2 px-4 py-2 rounded-l-md border border-gray-300 focus:outline-none focus:border-primary">
+                    <button type="submit" class="px-4 py-2 bg-primary text-white rounded-r-md hover:bg-secondary">Cari</button>
+                </div>
+            </div>
+
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
                 @forelse($books as $book)
                     <div class="flex flex-col items-start justify-between">
                         <div>
-                            <div class="flex-shrink-0 overflow-hidden bg-slate-400 p-4 mb-2 flex flex-col items-center justify-center h-52 w-full rounded-md">
+                            <div class="flex-shrink-0 overflow-hidden bg-slate-200 p-4 mb-2 flex flex-col items-center justify-center h-52 w-full rounded-md">
                                 <img src="{{ asset('storage/' . $book->image) }}" alt="{{ $book->title }}" class="w-full h-full object-contain object-center">
                             </div>
                             <h3 class="text-md font-bold leading-4 mb-2">{{ $book->title }}</h3>
@@ -69,7 +56,7 @@
                             <p class="text-sm leading-4 mb-4 {{ $book->stock > 0 ? 'text-green-600' : 'text-red-600' }}">
                                 Stock: {{ $book->stock }}
                             </p>
-                            <a href="{{ route('books.show', $book->id) }}" class="bg-gradient-to-r from-blue-400 to-primary text-white py-2 px-5 rounded-md hover:bg-gradient-to-r hover:from-primary hover:to-blue-400">Detail Buku</a>
+                            <a href="{{ route('books.show', $book->id) }}" class="bg-gradient-to-r from-blue-400 to-primary text-white py-2 px-5 rounded-md hover:bg-gradient-to-r hover:from-primary hover:to-blue-400 shadow-md">Detail Buku</a>
                         </div>
                     </div>
                 @empty
@@ -82,7 +69,7 @@
                     <p class="text-gray-600 mb-4">
                         Kami sedang memperbarui koleksi buku kami. Harap cek kembali nanti atau hubungi staf perpustakaan untuk informasi lebih lanjut.
                     </p>
-                    <a href="{{ route('home') }}" class="bg-gradient-to-r from-blue-400 to-primary text-white py-2 px-5 rounded-md hover:bg-gradient-to-r hover:from-primary hover:to-blue-400">
+                    <a href="{{ route('home') }}" class="bg-primary text-white py-2 px-5 rounded-lg hover:bg-secondary">
                         Kembali ke Beranda
                     </a>
                 </div>
@@ -90,6 +77,10 @@
             </div>
         </div>
     </section>
+
+    <!-- Blur Background Elements -->
+    {{-- <div class="absolute w-[30rem] h-[40rem] md:w-[40rem] md:h-[40rem] top-[45rem] right-[-14rem] md:top-[35rem] md:right-[-14rem] bg-secondary/30 rounded-full blur-3xl -z-10"></div>
+    <div class="absolute w-[20rem] h-[30em] md:w-[30rem] md:h-[30rem] top-[55rem] right-[-12rem] md:top-[45rem] md:right-[-12rem] bg-primary/40 rounded-full blur-3xl -z-10"></div> --}}
 
     <!-- Footer -->
     <footer class="bg-gray-800 text-gray-200 py-6">

@@ -11,6 +11,8 @@ use App\Http\Controllers\MemberProfileController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/books/{book}', [BookController::class, 'show'])->name('books.show');
 
+Route::get('/allBook', [HomeController::class, 'allBook'])->name('allBook');
+
 Route::prefix('member')->group(function () {
     Route::get('/register', [MemberRegistrationController::class, 'create'])->name('register.member');
     Route::post('/register', [MemberRegistrationController::class, 'store']);

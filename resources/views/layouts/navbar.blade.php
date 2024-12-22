@@ -10,7 +10,7 @@
         <!-- Center Section (Menu Links) -->
         <div class="hidden md:flex items-center gap-6">
             <a href="{{ route('home') }}" class="text-gray-700 font-medium hover:text-gray-900">Home</a>
-            <a href="{{ route('books.show', 1) }}" class="text-gray-700 font-medium hover:text-gray-900">Books</a>
+            <a href="{{ route('allBook') }}" class="text-gray-700 font-medium hover:text-gray-900">Books</a>
         </div>
 
         <!-- Right Section -->
@@ -34,8 +34,8 @@
                 </div>
             @else
                 <!-- Login and Register Buttons -->
-                <a href="{{ route('register.member') }}" class="bg-gradient-to-r from-blue-400 to-primary text-white py-2 px-5 rounded-md hover:bg-gradient-to-r hover:from-primary hover:to-blue-400">Daftar</a>
-                <a href="{{ route('login.member') }}" class="bg-gradient-to-r from-purple-400 to-secondary text-white py-2 px-5 rounded-md hover:bg-gradient-to-r hover:from-secondary hover:to-purple-400">Login</a>
+                <a href="{{ route('register.member') }}" class="bg-gradient-to-r from-blue-400 to-primary text-white py-2 px-5 rounded-md hover:bg-gradient-to-r hover:from-primary hover:to-blue-400 shadow-md">Daftar</a>
+                <a href="{{ route('login.member') }}" class="bg-gradient-to-r from-purple-400 to-secondary text-white py-2 px-5 rounded-md hover:bg-gradient-to-r hover:from-secondary hover:to-purple-400 shadow-md">Login</a>
             @endif
         </div>
 
@@ -56,7 +56,7 @@
     <div id="mobileMenu" class="hidden md:hidden flex-col gap-4 py-8 px-2 border-t border-t-primary mt-2">
         <div class="flex flex-col gap-2 mb-2">
             <a href="{{ route('home') }}" class="text-gray-700 font-medium hover:text-gray-900">Home</a>
-            <a href="{{ route('books.show', 1) }}" class="text-gray-700 font-medium hover:text-gray-900">Books</a>
+            <a href="{{ route('allBook') }}" class="text-gray-700 font-medium hover:text-gray-900">Books</a>
         </div>
         @if(Auth::guard('member')->check())
             <a href="{{ route('member.edit') }}" class="text-gray-700 font-medium hover:text-gray-900">Profile</a>
@@ -66,8 +66,8 @@
             </form>
         @else
         <div>
-            <a href="{{ route('register.member') }}" class="bg-gradient-to-r from-blue-400 to-primary text-white py-2 px-5 rounded-md hover:bg-gradient-to-r hover:from-primary hover:to-blue-400">Daftar</a>
-            <a href="{{ route('login.member') }}" class="bg-gradient-to-r from-purple-400 to-secondary text-white py-2 px-5 rounded-md hover:bg-gradient-to-r hover:from-secondary hover:to-purple-400">Login</a>
+            <a href="{{ route('register.member') }}" class="bg-gradient-to-r from-blue-400 to-primary text-white py-2 px-5 rounded-md hover:bg-gradient-to-r hover:from-primary hover:to-blue-400 shadow-md">Daftar</a>
+            <a href="{{ route('login.member') }}" class="bg-gradient-to-r from-purple-400 to-secondary text-white py-2 px-5 rounded-md hover:bg-gradient-to-r hover:from-secondary hover:to-purple-400 shadow-md">Login</a>
         </div>
         @endif
     </div>
