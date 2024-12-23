@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminBookingController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\ProfileController;
@@ -23,6 +24,7 @@ Route::prefix('member')->group(function () {
 
 // Booking
 Route::middleware(['auth:member'])->group(function () {
+    Route::get('/book/{book_id}/booking', [BookController::class, 'create'])->name('booking.create');
     Route::post('/booking', [BookingController::class, 'store'])->name('bookings.store');
 });
 
@@ -57,6 +59,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/books/edit/{id}', [BookController::class, 'edit'])->name('books.edit');
     Route::put('/books/update/{id}', [BookController::class, 'update'])->name('books.update');
     Route::delete('/books/{id}', [BookController::class, 'destroy'])->name('books.destroy');
+    
+
+    Route::get('/admin/bookings', [AdminBookingController::class, 'index'])->name('admin.bookings.index');
+
+    // Approve dan penolakan booking
+    Route::put('/admin/bookings/{id}/approve', [AdminBookingController::class, 'approve'])->name('admin.booking.approve');
+    Route::put('/admin/bookings/{id}/reject', [AdminBookingController::class, 'reject'])->name('admin.booking.reject');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
