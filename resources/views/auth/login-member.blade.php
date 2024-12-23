@@ -6,10 +6,16 @@
     <title>Login Member</title>
     @vite('resources/css/app.css')
 </head>
-<body class="bg-gray-100">
-    <div class="min-h-screen flex items-center justify-center">
-        <div class="max-w-md w-full bg-white p-6 rounded-lg shadow-md">
-            <h2 class="text-2xl font-bold text-center mb-6 text-gray-800">Login Member</h2>
+<body class="bg-tertiary">
+    <div class="relative min-h-screen flex items-center justify-center px-4 overflow-x-hidden">
+
+            <!-- Blur Background Elements -->
+            <div class="absolute w-[40rem] h-[40rem] top-0 left-[0rem] bg-primary/50 rounded-full blur-3xl -z-10"></div>
+            <div class="absolute w-[40rem] h-[40rem] bottom-10 right-[0rem] bg-secondary/50 rounded-full blur-3xl -z-10"></div>
+            <div class="absolute w-[30rem] h-[30rem] inset-0 bg-green-300/50 rounded-full blur-3xl -z-10 m-auto"></div>
+
+        <div class="max-w-md w-full bg-white/20 border border-gray-200 p-6 rounded-lg shadow-md">
+            <h2 class="text-2xl font-bold text-center mb-6 text-gray-800">Login Anggota</h2>
 
             {{-- Check if the user is logged in --}}
             {{-- @if (Auth::guard('member')->check())
@@ -40,19 +46,19 @@
 
                 <div class="mb-4">
                     <label for="email" class="block text-sm font-medium">Email</label>
-                    <input type="email" name="email" id="email" value="{{ old('email') }}" required
+                    <input type="email" name="email" id="email" value="{{ old('email') }}" placeholder="Masukkan Email.." required
                            class="w-full px-3 py-2 border rounded-lg focus:ring focus:ring-blue-200">
                 </div>
 
                 <div class="mb-4">
-                    <label for="password" class="block text-sm font-medium">Password</label>
-                    <input type="password" name="password" id="password" required
+                    <label for="password" class="block text-sm font-medium">Kata Sandi</label>
+                    <input type="password" name="password" id="password" placeholder="********" required
                            class="w-full px-3 py-2 border rounded-lg focus:ring focus:ring-blue-200">
                 </div>
 
                 <div class="mb-4 flex items-center">
                     <input type="checkbox" name="remember" id="remember" class="mr-2">
-                    <label for="remember" class="text-sm">Remember Me</label>
+                    <label for="remember" class="text-sm">Ingat Akun Saya</label>
                 </div>
 
                 <div>

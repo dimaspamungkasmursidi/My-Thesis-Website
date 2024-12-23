@@ -7,15 +7,23 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\MemberRegistrationController;
 use App\Http\Controllers\Auth\MemberLoginController;
 use App\Http\Controllers\MemberProfileController;
+use App\Http\Controllers\AdminDashboardController;
+use App\Http\Controllers\BookingController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/books/{book}', [BookController::class, 'show'])->name('books.show');
+Route::get('/allBook/{categoryId}', [BookController::class, 'indexByCategory'])->name('books.category');
 
 Route::get('/allBook', [HomeController::class, 'allBook'])->name('allBook');
 
 Route::prefix('member')->group(function () {
     Route::get('/register', [MemberRegistrationController::class, 'create'])->name('register.member');
     Route::post('/register', [MemberRegistrationController::class, 'store']);
+});
+
+// Booking
+Route::middleware(['auth:member'])->group(function () {
+    Route::post('/booking', [BookingController::class, 'store'])->name('bookings.store');
 });
 
 Route::get('/login-member', [MemberLoginController::class, 'create'])->name('login.member');
@@ -36,6 +44,11 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
+    // Dashboard routes
+    Route::get('dashboard', [AdminDashboardController::class, 'dashboard'])->name('dashboard');
+
+    Route::get('/members', [AdminDashboardController::class, 'members'])->name('members');
+    Route::delete('/members/{id}', [AdminDashboardController::class, 'destroy'])->name('members.destroy');
 
     // Route::resource('books', BookController::class); // CRUD untuk
     Route::get('/books', [BookController::class, 'index'])->name('books.index');

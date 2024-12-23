@@ -13,15 +13,15 @@ return new class extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('book_id');
-            $table->unsignedBigInteger('user_id');
+            $table->foreignId('book_id')->constrained('books')->onDelete('cascade');
+            $table->foreignId('member_id')->constrained('members')->onDelete('cascade');
             $table->integer('quantity');
-            $table->timestamp('booked_at')->nullable;
+            $table->dateTime('booked_at');
+            $table->integer('stock');
+            $table->string('status')->default('pending');
+            $table->date('borrow_date')->nullable();
+            $table->date('return_date')->nullable();
             $table->timestamps();
-
-            // Relasi
-            $table->foreign('book_id')->references('id')->on('books')->onDelete('cascade');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

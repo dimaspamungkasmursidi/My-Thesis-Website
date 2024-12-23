@@ -11,18 +11,26 @@ class Booking extends Model
 
     protected $fillable = [
         'book_id',
-        'user_id',
+        'member_id',
         'quantity',
         'booked_at',
+        'stock',
+        'status',
+        'borrow_date',
+        'return_date'
     ];
+
+    const STATUS_PENDING = 'pending';
+    const STATUS_APPROVED = 'approved';
+    const STATUS_REJECTED = 'rejected';
 
     public function book()
     {
-        return $this->belongsTo(Books::class);
+        return $this->belongsTo(Book::class);
     }
 
-    public function user()
+    public function member()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Member::class);
     }
 }

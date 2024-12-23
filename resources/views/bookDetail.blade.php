@@ -19,7 +19,39 @@
                         </span>
                         Kembali
                     </a>
-                    <button class="bg-gradient-to-r from-blue-400 to-primary text-white py-2 px-5 rounded-md hover:bg-gradient-to-r hover:from-primary hover:to-blue-400 shadow-md">Booking</button>
+                    {{-- <button class="bg-gradient-to-r from-blue-400 to-primary text-white py-2 px-5 rounded-md hover:bg-gradient-to-r hover:from-primary hover:to-blue-400 shadow-md">Booking</button> --}}
+                    {{-- <form action="{{ route('booking.store') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="id_buku" value="{{ $book->id }}">
+                        <button type="submit" class="bg-gradient-to-r from-blue-400 to-primary text-white py-2 px-5 rounded-md hover:bg-gradient-to-r hover:from-primary hover:to-blue-400 shadow-md">Booking</button>
+                    </form> --}}
+                    @if(session('success'))
+                        <div class="bg-green-500 text-white p-4 rounded-md mb-4">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+
+                    @if(session('error'))
+                        <div class="bg-red-500 text-white p-4 rounded-md mb-4">
+                            {{ session('error') }}
+                        </div>
+                    @endif
+
+
+                    @if(Auth::guard('member')->check())
+                    <form action="{{ route('bookings.store') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="book_id" value="{{ $book->id }}">
+                        <input type="number" name="quantity" min="1" value="1" required class="border p-2 hidden">
+                        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                            Booking Buku
+                        </button>
+                    </form>
+                    @else
+                        <a href="{{ route('login.member') }}" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
+                            Login untuk Booking
+                        </a>
+                    @endif
                 </div>
 
                 <!-- Blur Background Elements -->
