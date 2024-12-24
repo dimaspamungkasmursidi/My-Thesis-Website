@@ -11,7 +11,8 @@
         <div class="hidden md:flex items-center gap-6">
             <a href="{{ route('home') }}" class="text-gray-700 font-medium hover:text-gray-900">Home</a>
             <a href="{{ route('allBook') }}" class="text-gray-700 font-medium hover:text-gray-900">Books</a>
-        </div>
+            <a href="{{ route('myBooking') }}" class="text-gray-700 font-medium hover:text-gray-900">My Booking</a>
+         </div>
 
         <!-- Right Section -->
         <div class="hidden md:flex items-center gap-4">
@@ -57,6 +58,7 @@
         <div class="flex flex-col gap-2 mb-2">
             <a href="{{ route('home') }}" class="text-gray-700 font-medium hover:text-gray-900">Home</a>
             <a href="{{ route('allBook') }}" class="text-gray-700 font-medium hover:text-gray-900">Books</a>
+            <a href="{{ route('myBooking') }}" class="text-gray-700 font-medium hover:text-gray-900">My Booking</a>
         </div>
         @if(Auth::guard('member')->check())
             <a href="{{ route('member.edit') }}" class="text-gray-700 font-medium hover:text-gray-900">Profile</a>

@@ -6,9 +6,18 @@ use App\Models\Book;
 use App\Models\Booking;
 use App\Models\Member;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class BookingController extends Controller
 {
+
+    // public function __construct()
+    // {
+    //     // Pastikan pengguna sudah login
+    //     $this->middleware('member');
+    // }
+
     public function index()
     {
         $bookings = Booking::with(['book', 'member'])->get();
@@ -36,6 +45,7 @@ class BookingController extends Controller
         if ($request->quantity > $book->stock){
             return redirect()->back()->with('error', 'Insufficient stock.');
         }
+        
 
         $booking = Booking::create([
            'book_id' => $request->book_id,
@@ -52,4 +62,18 @@ class BookingController extends Controller
         return redirect()->back()->with('success', 'Booking has been added. waiting for admin approval!');
     }
 
+    public function myBooking()
+    {      
+        Log::info('Member ID:', ['id' => Auth::guard('member')->id()]);
+
+    if (!Auth::guard('member')->check()) {
+        Log::warning('Member is not logged in.');
+        return redirect()->route('login.member')->with('error', 'You must be logged in to view your bookings.');
+    }
+
+    $bookings = Booking::where('member_id', Auth::guard('member')->id())
+                       ->whereIn('status', ['approved', 'rejected'])
+                       ->get();
+    return view('myBooking', compact('bookings'));
+    }
 }

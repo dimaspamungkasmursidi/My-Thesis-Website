@@ -20,6 +20,8 @@ Route::get('/allBook', [HomeController::class, 'allBook'])->name('allBook');
 Route::prefix('member')->group(function () {
     Route::get('/register', [MemberRegistrationController::class, 'create'])->name('register.member');
     Route::post('/register', [MemberRegistrationController::class, 'store']);
+    
+Route::get('/myBooking', [BookingController::class, 'myBooking'])->name('myBooking');
 });
 
 // Booking

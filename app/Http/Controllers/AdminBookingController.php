@@ -9,7 +9,7 @@ class AdminBookingController extends Controller
 {
     public function index()
     {
-        $bookings = Booking::where('status', 'pending')->get();
+        $bookings = Booking::with('book', 'member')->get();
         return view('admin.bookings.index', compact('bookings'));
     }
 
