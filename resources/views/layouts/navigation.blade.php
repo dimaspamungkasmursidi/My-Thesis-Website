@@ -6,7 +6,7 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-200" />
+                        <img src="{{ asset('images/logo.png') }}" alt="Logo" class="w-10">
                     </a>
                 </div>
 
@@ -20,6 +20,16 @@
                     </x-nav-link>
                     <x-nav-link :href="route('members')" :active="request()->routeIs('members.*')">
                         {{ __('Members List') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('admin.bookings.index')" :active="request()->routeIs('admin.bookings.*')">
+                        {{ __('Booking List') }}
+                        @if ($pendingCount > 0)
+                            <div class="ml-2 flex items-center">
+                                <span class="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white bg-red-600 rounded-full animate-pulse">
+                                    {{ $pendingCount }}
+                                </span>
+                            </div>
+                        @endif
                     </x-nav-link>
                 </div>
             </div>
@@ -60,11 +70,20 @@
 
             <!-- Hamburger -->
             <div class="-me-2 flex items-center sm:hidden">
-                <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-500 hover:hover:text-gray-400 hover:bg-gray-900 focus:outline-none focus:bg-gray-900 focus:focus:text-gray-400 transition duration-150 ease-in-out">
+                <button @click="open = ! open" class="relative inline-flex items-center justify-center p-2 rounded-md text-gray-500 hover:hover:text-gray-400 hover:bg-gray-900 focus:outline-none focus:bg-gray-900 focus:focus:text-gray-400 transition duration-150 ease-in-out">
                     <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                         <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                         <path :class="{'hidden': ! open, 'inline-flex': open }" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                     </svg>
+                    <div class="absolute top-0 right-0 inline-flex items-center justify-center w-4 h-4 text-xs font-bold leading-none text-white bg-red-600 rounded-full">
+                        @if ($pendingCount > 0)
+                            <div class="flex items-center">
+                                <span class="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white bg-red-600 rounded-full animate-pulse">
+                                    {{ $pendingCount }}
+                                </span>
+                            </div>
+                        @endif
+                    </div>
                 </button>
             </div>
         </div>
@@ -81,6 +100,16 @@
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('members')" :active="request()->routeIs('members.*')">
                 {{ __('Members List') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('admin.bookings.index')" :active="request()->routeIs('admin.bookings.*')" class="flex items-center gap-2">
+                {{ __('Booking List') }}
+                @if ($pendingCount > 0)
+                    <div class="flex items-center">
+                        <span class="inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white bg-red-600 rounded-full animate-pulse">
+                            {{ $pendingCount }}
+                        </span>
+                    </div>
+                @endif
             </x-responsive-nav-link>
         </div>
 

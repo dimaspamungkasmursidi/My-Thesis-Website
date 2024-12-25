@@ -43,12 +43,12 @@
                         @csrf
                         <input type="hidden" name="book_id" value="{{ $book->id }}">
                         <input type="number" name="quantity" min="1" value="1" required class="border p-2 hidden">
-                        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                        <button type="submit" class="bg-gradient-to-r from-blue-400 to-primary text-white py-2 px-5 rounded-md hover:bg-gradient-to-r hover:from-primary hover:to-blue-400 shadow-md">
                             Booking Buku
                         </button>
                     </form>
                     @else
-                        <a href="{{ route('login.member') }}" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">
+                        <a href="{{ route('login.member') }}" class="bg-gradient-to-r from-blue-400 to-primary text-white py-2 px-5 rounded-md hover:bg-gradient-to-r hover:from-primary hover:to-blue-400 shadow-md">
                             Login untuk Booking
                         </a>
                     @endif

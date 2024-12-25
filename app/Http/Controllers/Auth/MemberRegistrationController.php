@@ -25,6 +25,8 @@ class MemberRegistrationController extends Controller
         ], [
             'whatsapp_number.required' => 'Nomor WhatsApp wajib diisi.',
             'whatsapp_number.regex' => 'Nomor WhatsApp hanya boleh mengandung angka dan tanda +.',
+            'address.required' => 'Alamat wajib diisi.',
+            'address.max' => 'Alamat maksimal 500 karakter.',
         ]);
 
         // Simpan data ke database
@@ -39,7 +41,7 @@ class MemberRegistrationController extends Controller
         // Login otomatis setelah registrasi
         // auth()->guard('member')->attempt($request->only('email', 'password'));
 
-        return redirect()->route('login.member')->with('status', 'Registration successful! Please login.');
+        return redirect()->route('login.member')->with('status', 'Yeay, Pendaftaran berhasil! Tolong login dulu ya.');
     }
 }
 

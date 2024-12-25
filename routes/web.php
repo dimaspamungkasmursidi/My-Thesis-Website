@@ -64,6 +64,10 @@ Route::middleware('auth')->group(function () {
     
 
     Route::get('/admin/bookings', [AdminBookingController::class, 'index'])->name('admin.bookings.index');
+    Route::get('/layout/navigation', [AdminBookingController::class, 'index'])->name('admin.bookings.index');
+
+    // Route untuk menghapus booking
+    Route::delete('admin/bookings/{id}', [AdminBookingController::class, 'destroyMyBooking'])->name('admin.booking.destroy');
 
     // Approve dan penolakan booking
     Route::put('/admin/bookings/{id}/approve', [AdminBookingController::class, 'approve'])->name('admin.booking.approve');

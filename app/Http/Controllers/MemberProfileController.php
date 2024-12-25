@@ -45,7 +45,7 @@ class MemberProfileController extends Controller
         $member->save();  // Menyimpan perubahan ke database
 
         // Redirect dengan pesan sukses
-        return redirect()->route('member.edit')->with('success', 'Profile updated successfully.');
+        return redirect()->route('member.edit')->with('success', 'Yeay, Profil berhasil diperbarui.');
     } else {
         // Jika member tidak ditemukan
         return redirect()->back()->with('error', 'User not found.');

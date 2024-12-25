@@ -21,8 +21,9 @@
         }
     }
 </style>
-<body class="relative bg-tertiary font-sans overflow-x-hidden">
+<body class="bg-tertiary">
     <!-- Header -->
+     <section class="relative overflow-x-hidden">
     @include('layouts.navbar')
 
     <!-- Blur Background Elements -->
@@ -59,7 +60,7 @@
                 @forelse($books as $book)
                     <div class="flex flex-col items-start justify-between">
                         <div>
-                            <div class="flex-shrink-0 overflow-hidden bg-slate-400 p-4 mb-2 flex flex-col items-center justify-center h-52 w-full rounded-md">
+                            <div class="flex-shrink-0 overflow-hidden bg-white/30 border border-gray-300 p-4 mb-2 flex flex-col items-center justify-center h-52 w-full rounded-md">
                                 <img src="{{ asset('storage/' . $book->image) }}" alt="{{ $book->title }}" class="w-full h-full object-contain object-center">
                             </div>
                             <h3 class="text-md font-bold leading-4 mb-2">{{ $book->title }}</h3>
@@ -91,12 +92,8 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-gray-200 py-6">
-        <div class="container mx-auto text-center">
-            <p>&copy; 2024 My Library. All Rights Reserved.</p>
-        </div>
-    </footer>
+    @include('layouts.footer')
+    </section>
 
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 </body>

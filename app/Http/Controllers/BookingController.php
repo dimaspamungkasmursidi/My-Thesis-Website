@@ -21,6 +21,7 @@ class BookingController extends Controller
     public function index()
     {
         $bookings = Booking::with(['book', 'member'])->get();
+        
         return view('bookings.index', compact(var_name: 'bookings'));
     }
 
@@ -43,7 +44,7 @@ class BookingController extends Controller
         $book = Book::findOrFail($request->book_id);
 
         if ($request->quantity > $book->stock){
-            return redirect()->back()->with('error', 'Insufficient stock.');
+            return redirect()->back()->with('error', 'Yah, sayang banget, stok bukunya kosong.');
         }
         
 
@@ -59,7 +60,7 @@ class BookingController extends Controller
         $book->stock -= $request->quantity;
         $book->save();
 
-        return redirect()->back()->with('success', 'Booking has been added. waiting for admin approval!');
+        return redirect()->back()->with('success', 'Booking telah ditambahkan. tunggu persetujuan admin ya!');
     }
 
     public function myBooking()
@@ -72,8 +73,10 @@ class BookingController extends Controller
     }
 
     $bookings = Booking::where('member_id', Auth::guard('member')->id())
-                       ->whereIn('status', ['approved', 'rejected'])
-                       ->get();
+                       ->whereIn('status', ['pending', 'approved', 'rejected'])
+                       ->orderBy('created_at', 'desc') // Tambahkan orderBy untuk mengatur urutan
+                       ->paginate(10); // Menampilkan 10 data per halaman
+                       
     return view('myBooking', compact('bookings'));
     }
 }

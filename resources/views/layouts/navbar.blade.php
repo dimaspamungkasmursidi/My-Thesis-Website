@@ -9,18 +9,18 @@
 
         <!-- Center Section (Menu Links) -->
         <div class="hidden md:flex items-center gap-6">
-            <a href="{{ route('home') }}" class="text-gray-700 font-medium hover:text-gray-900">Home</a>
-            <a href="{{ route('allBook') }}" class="text-gray-700 font-medium hover:text-gray-900">Books</a>
+            <a href="{{ route('home') }}" class="text-gray-700 font-medium hover:text-gray-900">Beranda</a>
+            <a href="{{ route('allBook') }}" class="text-gray-700 font-medium hover:text-gray-900">Semua Buku</a>
             <a href="{{ route('myBooking') }}" class="text-gray-700 font-medium hover:text-gray-900">My Booking</a>
          </div>
 
         <!-- Right Section -->
         <div class="hidden md:flex items-center gap-4">
-            @if(Auth::guard('member')->check())
+            @if(Auth::guard(name: 'member')->check())
                 <!-- Dropdown for Logged-In Members -->
                 <div class="relative">
                     <button id="dropdownButton" class="flex items-center space-x-2 bg-gray-700 text-white py-2 px-4 rounded-lg hover:bg-gray-600">
-                        <span>{{ Auth::guard('member')->user()->name }}</span>
+                        <span id="username">{{ Auth::guard(name: 'member')->user()->name }}</span>
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                         </svg>
@@ -29,7 +29,7 @@
                         <a href="{{ route('member.edit') }}" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">Profile</a>
                         <form method="POST" action="{{ route('logout.member') }}" class="block">
                             @csrf
-                            <button type="submit" class="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100">Logout</button>
+                            <button type="submit" class="w-full bg-red-500 text-left px-4 py-2 text-gray-200 hover:bg-red-400 hover:text-gray-900 rounded-b-lg">Logout</button>
                         </form>
                     </div>
                 </div>
@@ -56,8 +56,8 @@
     <!-- Mobile Dropdown Menu -->
     <div id="mobileMenu" class="hidden md:hidden flex-col gap-4 py-8 px-2 border-t border-t-primary mt-2">
         <div class="flex flex-col gap-2 mb-2">
-            <a href="{{ route('home') }}" class="text-gray-700 font-medium hover:text-gray-900">Home</a>
-            <a href="{{ route('allBook') }}" class="text-gray-700 font-medium hover:text-gray-900">Books</a>
+            <a href="{{ route('home') }}" class="text-gray-700 font-medium hover:text-gray-900">Beranda</a>
+            <a href="{{ route('allBook') }}" class="text-gray-700 font-medium hover:text-gray-900">Semua Buku</a>
             <a href="{{ route('myBooking') }}" class="text-gray-700 font-medium hover:text-gray-900">My Booking</a>
         </div>
         @if(Auth::guard('member')->check())
@@ -76,37 +76,48 @@
 </nav>
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-    const mobileMenuButton = document.getElementById('mobileMenuButton');
-    const mobileMenu = document.getElementById('mobileMenu');
-    const hamburgerIcon = document.getElementById('hamburgerIcon');
-    const closeIcon = document.getElementById('closeIcon');
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const hamburgerIcon = document.getElementById('hamburgerIcon');
+        const closeIcon = document.getElementById('closeIcon');
 
-    mobileMenuButton?.addEventListener('click', () => {
-        if (mobileMenu.classList.contains('hidden')) {
-            mobileMenu.classList.remove('hidden');
-            mobileMenu.classList.add('flex');
-        } else {
-            mobileMenu.classList.remove('flex');
-            mobileMenu.classList.add('hidden');
+        mobileMenuButton?.addEventListener('click', () => {
+            if (mobileMenu.classList.contains('hidden')) {
+                mobileMenu.classList.remove('hidden');
+                mobileMenu.classList.add('flex');
+            } else {
+                mobileMenu.classList.remove('flex');
+                mobileMenu.classList.add('hidden');
+            }
+            hamburgerIcon.classList.toggle('hidden');
+            closeIcon.classList.toggle('hidden');
+        });
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const dropdownButton = document.getElementById('dropdownButton');
+        const dropdownMenu = document.getElementById('dropdownMenu');
+
+        dropdownButton.addEventListener('click', () => {
+            dropdownMenu.classList.toggle('hidden');
+        });
+
+        document.addEventListener('click', (event) => {
+            if (!dropdownButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
+                dropdownMenu.classList.add('hidden');
+            }
+        });
+    });
+
+    const truncateText = (selector, maxLength) => {
+        const element = document.querySelector(selector);
+
+        if (element && element.textContent.length > maxLength) {
+            element.textContent = element.textContent.slice(0, maxLength) + '...';
         }
-        hamburgerIcon.classList.toggle('hidden');
-        closeIcon.classList.toggle('hidden');
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+        truncateText('#username', 20);
     });
-});
-
-document.addEventListener('DOMContentLoaded', () => {
-    const dropdownButton = document.getElementById('dropdownButton');
-    const dropdownMenu = document.getElementById('dropdownMenu');
-
-    dropdownButton.addEventListener('click', () => {
-        dropdownMenu.classList.toggle('hidden');
-    });
-
-    document.addEventListener('click', (event) => {
-        if (!dropdownButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
-            dropdownMenu.classList.add('hidden');
-        }
-    });
-});
-
 </script>

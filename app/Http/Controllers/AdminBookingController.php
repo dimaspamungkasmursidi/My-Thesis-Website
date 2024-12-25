@@ -9,7 +9,10 @@ class AdminBookingController extends Controller
 {
     public function index()
     {
-        $bookings = Booking::with('book', 'member')->get();
+        $bookings = Booking::with('book', 'member')
+                            ->orderBy('created_at', 'desc') // Urutkan berdasarkan waktu pembuatan
+                            ->get();
+                            
         return view('admin.bookings.index', compact('bookings'));
     }
 
@@ -34,5 +37,17 @@ class AdminBookingController extends Controller
         $booking->save();
 
         return redirect()->route('admin.bookings.index')->with('success', 'Booking has been rejected.');
+    }
+
+    public function destroyMyBooking($id)
+    {
+        // Cari booking berdasarkan ID
+        $booking = Booking::findOrFail($id);
+
+        // Hapus booking
+        $booking->delete();
+
+        // Redirect kembali dengan pesan sukses
+        return redirect()->route('admin.bookings.index')->with('success', 'Booking berhasil dihapus!');
     }
 }
