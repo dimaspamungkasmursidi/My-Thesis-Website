@@ -38,7 +38,7 @@
             <form action="">
                 <div class="flex items-center justify-center md:justify-start">
                     <input type="text" placeholder="Cari buku" class="w-full md:w-1/2 px-4 py-2 rounded-l-md border border-gray-300 focus:outline-none focus:border-primary">
-                    <button type="submit" class="px-4 py-2 bg-primary text-white rounded-r-md hover:bg-tertiary">Cari</button>
+                    <button type="submit" class="px-4 py-2 bg-primary text-white rounded-r-md hover:bg-secondary">Cari</button>
                 </div>
             </form>
         </div>
@@ -52,10 +52,10 @@
     <div class="absolute w-[30rem] h-[40rem] md:w-[40rem] md:h-[40rem] top-[45rem] left-[-14rem] md:top-[35rem] md:left-[-14rem] bg-secondary/40 rounded-full blur-3xl -z-10"></div>
     <div class="absolute w-[20rem] h-[30em] md:w-[30rem] md:h-[30rem] top-[55rem] left-[-12rem] md:top-[45rem] md:left-[-12rem] bg-primary/40 rounded-full blur-3xl -z-10"></div>
 
-    <!-- Popular Books Section -->
+    <!-- Book Suggestions Section -->
     <section id="books" class="pb-16 px-4 md:px-20">
         <div class="container mx-auto">
-            <h2 class="text-3xl font-bold mb-6 text-center">Koleksi Buku Terfavorit</h2>
+            <h2 class="text-3xl font-bold mb-6 text-center">Rekomendasi Buku Keren Buat Kamu</h2>
             <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
                 @forelse($books as $book)
                     <div class="flex flex-col items-start justify-between">
@@ -84,13 +84,90 @@
                         Kami sedang memperbarui koleksi buku kami. Harap cek kembali nanti atau hubungi staf perpustakaan untuk informasi lebih lanjut.
                     </p>
                     <a href="{{ route('home') }}" class="bg-gradient-to-r from-blue-400 to-primary text-white py-2 px-5 rounded-md hover:bg-gradient-to-r hover:from-primary hover:to-blue-400">
-                        Kembali ke Beranda
+                        Kembali ke BerKamu
                     </a>
                 </div>
                 @endforelse
             </div>
         </div>
     </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="pb-16 px-4 md:px-20">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold mb-6 text-center">Pertanyaan yang Sering Ditanyakan (FAQ)</h2>
+            <div class="space-y-4">
+                <!-- FAQ Item 1 -->
+                <div x-data="{ open: false }" class="bg-white/30 border border-gray-300 rounded-md">
+                    <button @click="open = !open" class="w-full text-left px-6 py-4 flex items-center justify-between gap-4">
+                        <h3 class="text-lg font-bold text-primary">Bagaimana cara mendaftar sebagai anggota?</h3>
+                        <span :class="open ? 'rotate-90' : ''" class="transition-transform text-2xl">
+                        ➯
+                        </span>
+                    </button>
+                    <div x-show="open" x-transition class="px-6 pb-4 text-gray-600 leading-relaxed">
+                    Daftar jadi anggota gampang banget! Kamu bisa langsung daftar di halaman <a href="{{ route('register.member') }}" class="text-blue-500 underline hover:text-blue-700">pendaftaran anggota</a>, atau kalau butuh bantuan, mampir aja ke perpustakaan. Kami siap bantu!.
+                    </div>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div x-data="{ open: false }" class="bg-white/30 border border-gray-300 rounded-md">
+                    <button @click="open = !open" class="w-full text-left px-6 py-4 flex items-center justify-between gap-4">
+                        <h3 class="text-lg font-bold text-primary">Bagaimana cara meminjam buku?</h3>
+                        <span :class="open ? 'rotate-90' : ''" class="transition-transform text-2xl">
+                        ➯
+                        </span>
+                    </button>
+                    <div x-show="open" x-transition class="px-6 pb-4 text-gray-600 leading-relaxed">
+                    Pinjam buku? Mudah banget! Mulai dengan cari buku favorit kamu di <a href="{{ route('allBook') }}" class="text-blue-500 underline hover:text-blue-700">halaman Semua Buku</a>, kalo udah ketemu buku yang kamu cari, klik tombol Detail Buku, terus klik Booking. Setelah itu, staf perpustakaan bakal nyiapin buku kamu. Tinggal datang dan ambil, deh!.
+                    </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div x-data="{ open: false }" class="bg-white/30 border border-gray-300 rounded-md">
+                    <button @click="open = !open" class="w-full text-left px-6 py-4 flex items-center justify-between gap-4">
+                        <h3 class="text-lg font-bold text-primary">Berapa lama durasi peminjaman buku?</h3>
+                        <span :class="open ? 'rotate-90' : ''" class="transition-transform text-2xl">
+                        ➯
+                        </span>
+                    </button>
+                    <div x-show="open" x-transition class="px-6 pb-4 text-gray-600 leading-relaxed">
+                    Durasi peminjaman buku itu 7 hari, jadi pastikan kamu kembaliin tepat waktu ya!.
+                    </div>
+                </div>
+
+                <!-- FAQ Item 4 -->
+                <div x-data="{ open: false }" class="bg-white/30 border border-gray-300 rounded-md">
+                    <button @click="open = !open" class="w-full text-left px-6 py-4 flex items-center justify-between gap-4">
+                        <h3 class="text-lg font-bold text-primary">Apakah ada denda untuk keterlambatan atau kerusakan buku?</h3>
+                        <span :class="open ? 'rotate-90' : ''" class="transition-transform text-2xl">
+                        ➯
+                        </span>
+                    </button>
+                    <div x-show="open" x-transition class="px-6 pb-4 text-gray-600 leading-relaxed">
+                    Iya, ada! Denda keterlambatan 2.000 per hari, mulai dari tanggal pengembalian yang ditentukan. Kalau bukunya rusak parah, denda 50% dari harga buku. Jika buku hilang, kamu diminta membeli buku yang sama dan diserahkan ke perpustakaan desa.
+                    </div>
+                </div>
+
+                <!-- FAQ Item 5 -->
+                <div x-data="{ open: false }" class="bg-white/30 border border-gray-300 rounded-md">
+                    <button @click="open = !open" class="w-full text-left px-6 py-4 flex items-center justify-between gap-4">
+                        <h3 class="text-lg font-bold text-primary">Apakah ada koleksi buku digital?</h3>
+                        <span :class="open ? 'rotate-90' : ''" class="transition-transform text-2xl">
+                        ➯
+                        </span>
+                    </button>
+                    <div x-show="open" x-transition class="px-6 pb-4 text-gray-600 leading-relaxed">
+                    Saat ini, kami belum menyediakan buku digital. Tapi tenang, kamu bisa cek katalog lengkap kami untuk menemukan berbagai buku fisik yang tersedia di perpustakaan!.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Blur Background Elements -->
+    <div class="absolute w-[30rem] h-[40rem] md:w-[40rem] md:h-[40rem] bottom-32 right-[-10rem] bg-secondary/40 rounded-full blur-3xl -z-10"></div>
+    <div class="absolute w-[20rem] h-[30em] md:w-[30rem] md:h-[30rem] bottom-0 right-[-12rem] bg-primary/40 rounded-full blur-3xl -z-10"></div>
 
     @include('layouts.footer')
     </section>

@@ -10,11 +10,11 @@ use App\Http\Controllers\Auth\MemberLoginController;
 use App\Http\Controllers\MemberProfileController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\CategoryController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/books/{book}', [BookController::class, 'show'])->name('books.show');
-Route::get('/allBook/{categoryId}', [BookController::class, 'indexByCategory'])->name('books.category');
-
+Route::get('/allBook/{categoryId}', [HomeController::class, 'indexByCategory'])->name('books.category');
 Route::get('/allBook', [HomeController::class, 'allBook'])->name('allBook');
 
 Route::prefix('member')->group(function () {
@@ -62,6 +62,8 @@ Route::middleware('auth')->group(function () {
     Route::put('/books/update/{id}', [BookController::class, 'update'])->name('books.update');
     Route::delete('/books/{id}', [BookController::class, 'destroy'])->name('books.destroy');
     
+    Route::resource('categories', CategoryController::class);
+
 
     Route::get('/admin/bookings', [AdminBookingController::class, 'index'])->name('admin.bookings.index');
     Route::get('/layout/navigation', [AdminBookingController::class, 'index'])->name('admin.bookings.index');

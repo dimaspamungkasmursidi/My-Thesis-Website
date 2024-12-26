@@ -3,20 +3,31 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class BookController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $books = Book::all();
-        return view('admin.books.index', compact(var_name: 'books'));
+        $categories = Category::all(); // Ambil semua kategori
+        $books = Book::with('category'); // Ambil buku dengan kategori
+    
+        // Filter buku berdasarkan kategori jika parameter 'category_id' ada di request
+        if ($request->has('category_id')) {
+            $books = $books->where('category_id', $request->category_id);
+        }
+    
+        $books = $books->get();
+
+        return view('admin.books.index', compact('books'));
     }
 
     public function create()
     {
-        return view('admin.books.create');
+        $categories = Category::all(); // Mengambil semua kategori
+        return view('admin.books.create', compact('categories'));
     }
 
     public function store(Request $request)
@@ -24,7 +35,7 @@ class BookController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'author' => 'required|string|max:255',
-            'category' => 'required|string|max:255',
+            'category_id' => 'required|exists:categories,id', // Validasi untuk kategori_id
             'year' => 'required|integer',
             'description' => 'required|string',
             'stock' => 'required|integer|min:0',
@@ -39,7 +50,7 @@ class BookController extends Controller
         $book = Book::create([
             'title' => $request->title,
             'author' => $request->author,
-            'category' => $request->category,
+            'category_id' => $request->category_id, // Simpan ID kategori
             'year' => $request->year,
             'description' => $request->description,
             'stock' => $request->stock,
@@ -60,9 +71,11 @@ class BookController extends Controller
 
     public function edit(string $id)
     {
-        $book  = Book::findOrFail($id);
-        return view('admin.books.edit', compact('book'));
+        $book = Book::findOrFail($id); // Mengambil data buku berdasarkan ID
+        $categories = Category::all(); // Mengambil semua kategori
+        return view('admin.books.edit', compact('book', 'categories'));
     }
+
 
     public function update(Request $request, string $id)
     {
@@ -71,7 +84,7 @@ class BookController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'author' => 'required|string|max:255',
-            'category' => 'required|string|max:255',
+            'category_id' => 'required|exists:categories,id', // Validasi kategori_id
             'year' => 'required|integer',
             'description' => 'required|string',
             'stock' => 'required|integer|min:0',
@@ -88,7 +101,7 @@ class BookController extends Controller
 
         $book->title = $request->title;
         $book->author = $request->author;
-        $book->category = $request->category;
+        $book->category_id = $request->category_id; // Update kategori_id
         $book->year = $request->year;
         $book->description = $request->description;
         $book->stock = $request->stock;

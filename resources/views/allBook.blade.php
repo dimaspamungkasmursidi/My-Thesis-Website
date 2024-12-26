@@ -38,9 +38,31 @@
                             Temukan berbagai buku yang kamu cari dengan mudah di koleksi kami. Kamu juga bisa mencari buku berdasarkan kategori.
                         </p>
                     </div>
-                    <div class="flex items-center justify-center mb-6">
-                        <input type="text" placeholder="Cari buku.." class="w-full md:w-1/2 px-4 py-2 rounded-l-md border border-gray-300 focus:outline-none focus:border-primary">
+
+                    <div class="flex items-center justify-center mb-4">
+                        <input type="text" placeholder="Cari buku.." class="w-full md:w-1/2 bg-white/30 px-4 py-2 rounded-l-md border border-gray-300 focus:outline-none focus:border-primary">
                         <button type="submit" class="px-4 py-2 bg-primary text-white rounded-r-md hover:bg-secondary">Cari</button>
+                    </div>
+
+                    <!-- Filter Kategori -->
+                    <div class="text-center flex md:items-center md:justify-center">
+                        <form method="GET" action="{{ route('allBook') }}">
+                            <!-- <label class="block mb-4 font-semibold text-lg">Filter Berdasarkan Kategori</label> -->
+                            <div class="flex overflow-x-auto gap-4 pb-2 scrollbar-hide">
+                                <!-- Tab pertama untuk Semua Buku -->
+                                <button type="submit" name="category_id" value="" 
+                                    class="flex-shrink-0 px-4 py-2 rounded-md {{ request('category_id') == '' ? 'bg-gradient-to-r from-primary to-blue-400 text-white hover:bg-gradient-to-r hover:from-blue-400 hover:to-primary hover:text-white' : 'bg-gray-100/20 border text-gray-700 hover:bg-gradient-to-r hover:from-blue-400 hover:to-primary hover:text-white' }}">
+                                    Semua Buku
+                                </button>
+                                <!-- Tab untuk kategori lainnya -->
+                                @foreach($categories as $category)
+                                    <button type="submit" name="category_id" value="{{ $category->id }}" 
+                                        class="flex-shrink-0 px-4 py-2 rounded-md {{ request('category_id') == $category->id ? 'bg-gradient-to-r from-primary to-blue-400 text-white hover:bg-gradient-to-r hover:from-blue-400 hover:to-primary hover:text-white' : 'bg-gray-100 text-gray-700 hover:bg-gradient-to-r hover:from-blue-400 hover:to-primary hover:text-white' }}">
+                                        {{ $category->name }}
+                                    </button>
+                                @endforeach
+                            </div>
+                        </form>
                     </div>
                 </div>
 
@@ -81,8 +103,8 @@
         </section>
 
         <!-- Blur Background Elements -->
-        {{-- <div class="absolute w-[30rem] h-[40rem] md:w-[40rem] md:h-[40rem] top-[45rem] right-[-14rem] md:top-[35rem] md:right-[-14rem] bg-secondary/30 rounded-full blur-3xl -z-10"></div>
-        <div class="absolute w-[20rem] h-[30em] md:w-[30rem] md:h-[30rem] top-[55rem] right-[-12rem] md:top-[45rem] md:right-[-12rem] bg-primary/40 rounded-full blur-3xl -z-10"></div> --}}
+        <div class="absolute w-[30rem] h-[40rem] md:w-[40rem] md:h-[40rem] bottom-32 right-[-10rem] bg-secondary/40 rounded-full blur-3xl -z-10"></div>
+        <div class="absolute w-[20rem] h-[30em] md:w-[30rem] md:h-[30rem] bottom-0 right-[-12rem] bg-primary/40 rounded-full blur-3xl -z-10"></div>
 
         @include('layouts.footer')
     </section>

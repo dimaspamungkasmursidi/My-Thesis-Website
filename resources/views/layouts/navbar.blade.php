@@ -19,7 +19,7 @@
             @if(Auth::guard(name: 'member')->check())
                 <!-- Dropdown for Logged-In Members -->
                 <div class="relative">
-                    <button id="dropdownButton" class="flex items-center space-x-2 bg-gray-700 text-white py-2 px-4 rounded-lg hover:bg-gray-600">
+                    <button id="dropdownButton" class="flex items-center space-x-2 bg-secondary/30 text-black py-2 px-4 rounded-lg hover:bg-gray-600">
                         <span id="username">{{ Auth::guard(name: 'member')->user()->name }}</span>
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
@@ -55,16 +55,16 @@
 
     <!-- Mobile Dropdown Menu -->
     <div id="mobileMenu" class="hidden md:hidden flex-col gap-4 py-8 px-2 border-t border-t-primary mt-2">
-        <div class="flex flex-col gap-2 mb-2">
+        <div class="flex flex-col gap-4 mb-2">
             <a href="{{ route('home') }}" class="text-gray-700 font-medium hover:text-gray-900">Beranda</a>
             <a href="{{ route('allBook') }}" class="text-gray-700 font-medium hover:text-gray-900">Semua Buku</a>
             <a href="{{ route('myBooking') }}" class="text-gray-700 font-medium hover:text-gray-900">My Booking</a>
         </div>
         @if(Auth::guard('member')->check())
-            <a href="{{ route('member.edit') }}" class="text-gray-700 font-medium hover:text-gray-900">Profile</a>
+            <a href="{{ route('member.edit') }}" class="bg-gradient-to-r from-primary to-blue-400 text-white py-2 px-5 rounded-md hover:bg-gradient-to-r hover:from-primary hover:to-blue-400 shadow-md font-medium hover:text-gray-900">Profile</a>
             <form method="POST" action="{{ route('logout.member') }}" class="block">
                 @csrf
-                <button type="submit" class="w-full text-left text-gray-700 font-medium hover:text-gray-900">Logout</button>
+                <button type="submit" class="w-full bg-gradient-to-r from-red-600 to-red-400 text-left py-2 px-5 rounded-md text-white font-medium hover:text-gray-900">Logout</button>
             </form>
         @else
         <div>

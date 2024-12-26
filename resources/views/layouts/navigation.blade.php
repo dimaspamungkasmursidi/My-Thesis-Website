@@ -18,8 +18,11 @@
                     <x-nav-link :href="route('books.index')" :active="request()->routeIs('books.*')">
                         {{ __('Books') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('members')" :active="request()->routeIs('members.*')">
-                        {{ __('Members List') }}
+                    <x-nav-link :href="route('categories.index')" :active="request()->routeIs('categories.*')">
+                        {{ __('Categories') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('members')" :active="request()->routeIs('members*')">
+                        {{ __('Members') }}
                     </x-nav-link>
                     <x-nav-link :href="route('admin.bookings.index')" :active="request()->routeIs('admin.bookings.*')">
                         {{ __('Booking List') }}
@@ -96,10 +99,13 @@
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('books.index')" :active="request()->routeIs('books.*')">
-                {{ __('books') }}
+                {{ __('Books') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('members')" :active="request()->routeIs('members.*')">
-                {{ __('Members List') }}
+            <x-responsive-nav-link :href="route('categories.index')" :active="request()->routeIs('categories.*')">
+                {{ __('Categories') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('members')" :active="request()->routeIs('members*')">
+                {{ __('Members') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('admin.bookings.index')" :active="request()->routeIs('admin.bookings.*')" class="flex items-center gap-2">
                 {{ __('Booking List') }}

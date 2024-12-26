@@ -54,9 +54,17 @@
             </div>
             <!-- Category -->
             <div>
-                <label for="category" class="block text-sm font-medium text-gray-800 dark:text-gray-200">Category</label>
-                <input type="text" id="category" name="category" placeholder="Enter book category" required
-                    class="mt-1 block w-full rounded-md bg-gray-900 border-gray-500 text-gray-800 dark:text-gray-200 shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                <label for="category_id" class="block text-sm font-medium text-gray-800 dark:text-gray-200">Category</label>
+                <select id="category_id" name="category_id" required
+                    class="mt-1 block w-full rounded-md bg-gray-900 border-gray-500 text-gray-800 dark:text-gray-200 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                    <option value="">Select Category</option>
+                    @foreach ($categories as $category)
+                        <option value="{{ $category->id }}" 
+                            @if(old('category_id') == $category->id) selected @endif>
+                            {{ $category->name }}
+                        </option>
+                    @endforeach
+                </select>
             </div>
             <!-- Author -->
             <div>

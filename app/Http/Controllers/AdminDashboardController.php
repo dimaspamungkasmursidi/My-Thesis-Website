@@ -28,9 +28,9 @@ class AdminDashboardController extends Controller
 
     public function destroy($id)
     {
-        $member = User::findOrFail($id);
+        $member = Member::findOrFail($id);
         $member->delete();
 
-        return redirect()->route('admin.members.index')->with('success', 'Member has been deleted successfully.');
+        return redirect()->route('members')->with('success', 'Member has been deleted successfully.');
     }
 }
