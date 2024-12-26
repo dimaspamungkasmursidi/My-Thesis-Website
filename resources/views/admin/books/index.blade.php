@@ -40,7 +40,7 @@
                             <tr class="border-b border-gray-700 hover:bg-gray-700 transition duration-300">
                                 <td class="px-6 py-4 text-gray-200">{{ $book->title }}</td>
                                 <td class="px-6 py-4 text-gray-200">{{ $book->author }}</td>
-                                <td class="px-6 py-4 text-gray-200">{{ $book->category }}</td>
+                                <td class="px-6 py-4 text-gray-200">{{ $book->category->name ?? 'No Category' }}</td>
                                 <td class="px-6 py-4 text-gray-200">{{ $book->year }}</td>
                                 <td class="px-6 py-4 text-gray-200">{{ $book->stock }}</td>
                                 <td class="px-6 py-4">
