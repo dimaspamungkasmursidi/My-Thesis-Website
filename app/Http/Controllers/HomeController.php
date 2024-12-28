@@ -16,7 +16,9 @@ class HomeController extends Controller
                       ->take(6)
                       ->get();
 
-        return view('welcome', compact('books'));
+        $newBook = Book::where('stock', '>=', 1)->orderBy('created_at', 'desc')->first();
+
+        return view('welcome', compact('books', 'newBook'));
     }
 
     // All Books Page

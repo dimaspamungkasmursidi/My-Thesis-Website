@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Profile</title>
     @vite('resources/css/app.css')
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body class="bg-tertiary">
     <section class="relative overflow-x-hidden py-8 px-4 md:px-20">
@@ -30,7 +31,7 @@
         <div class="absolute w-[30rem] h-[30rem] inset-0 bg-green-300/50 rounded-full blur-3xl -z-10 m-auto"></div>
 
         <div class="max-w-md w-full bg-white/20 border border-gray-200 p-8 rounded-lg shadow-xl my-12 overflow-x-hidden">
-            <h2 class="text-3xl font-extrabold text-center text-gray-800 mb-4">Edit Profile</h2>
+            <h2 class="text-3xl font-extrabold text-center text-gray-800 mb-4">Edit Profil</h2>
 
             @if (session('success'))
                 <div class="bg-green-50 text-green-600 p-4 rounded-lg mb-4">

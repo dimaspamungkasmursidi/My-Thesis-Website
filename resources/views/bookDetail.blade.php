@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    @vite('resources/css/app.css')
     <title>Detail Buku</title>
+    @vite('resources/css/app.css')
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
-<body>
-    <section class="py-8 px-4 md:px-20">
+<body class="bg-tertiary">
+    <section class="relative overflow-x-hidden">
         <div class="container mx-auto">
-            <div class="">
+            <div class="py-8 px-4 md:px-20 mb-16">
                 <div class="flex items-center justify-between mb-12">
                     <a href="javascript:history.back()" class="flex items-center gap-2 w-fit text-gray-500 hover:text-gray-700 font-medium group transition duration-300">
                         <span class="relative text-2xl">
@@ -69,9 +70,6 @@
                         <div class="relative pb-6 border-b-2 border-gray-300">
                             <h1 class="text-4xl font-bold text-gray-800 mb-2">{{ $book->title }}</h1>
                             <p class="text-gray-700 leading-relaxed">{{ $book->description }}</p>
-                            <!-- Blur Background Elements -->
-                            <div class="absolute md:hidden w-[20rem] h-[10rem] right-[-4rem] bg-primary/30 rounded-full blur-3xl -z-10 overflow-x-hidden"></div>
-                            <div class="absolute md:hidden w-[10rem] h-[10rem] right-[-4rem] bg-secondary/40 rounded-full blur-3xl -z-10 overflow-x-hidden"></div>
                         </div>
                         <div class="pt-6">
                             <table class="">
@@ -88,7 +86,7 @@
                                 <tr class="">
                                     <td class="text-sm font-semibold text-gray-600 px-2 py-1">Kategori</td>
                                     <td class="text-sm font-semibold text-gray-600 px-2 py-1">:</td>
-                                    <td class="text-sm font-semibold text-gray-600 px-2 py-1">{{ $book->category }}</td>
+                                    <td class="text-sm font-semibold text-gray-600 px-2 py-1">{{ $book->category->name ?? 'Tidak ada kategori' }}</td>
                                 </tr>
                                 <tr class="">
                                     <td class="text-sm font-semibold text-gray-600 px-2 py-1">Stok</td>
@@ -101,6 +99,12 @@
                 </div>
             </div>
         </div>
+    
+        <!-- Blur Background Elements -->
+        <div class="absolute w-[30rem] h-[40rem] md:w-[40rem] md:h-[30rem] bottom-32 right-[-10rem] md:bottom-0 bg-secondary/40 rounded-full blur-3xl -z-10"></div>
+        <div class="absolute w-[20rem] h-[30em] md:w-[30rem] md:h-[30rem] bottom-0 right-[-12rem] bg-primary/40 rounded-full blur-3xl -z-10"></div>
+
+        @include('layouts.footer')
     </section>
 </body>
 </html>

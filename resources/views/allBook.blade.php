@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    @vite('resources/css/app.css')
     <title>All Books</title>
+    @vite('resources/css/app.css')
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <style>
@@ -51,13 +51,13 @@
                             <div class="flex overflow-x-auto gap-4 pb-2 scrollbar-hide">
                                 <!-- Tab pertama untuk Semua Buku -->
                                 <button type="submit" name="category_id" value="" 
-                                    class="flex-shrink-0 px-4 py-2 rounded-md {{ request('category_id') == '' ? 'bg-gradient-to-r from-primary to-blue-400 text-white hover:bg-gradient-to-r hover:from-blue-400 hover:to-primary hover:text-white' : 'bg-gray-100/20 border text-gray-700 hover:bg-gradient-to-r hover:from-blue-400 hover:to-primary hover:text-white' }}">
+                                    class="flex-shrink-0 px-4 py-2 rounded-md {{ request('category_id') == '' ? 'bg-gradient-to-r from-primary to-blue-400 text-white hover:bg-gradient-to-r hover:from-blue-400 hover:to-primary hover:text-white' : 'bg-gray-100/20 border border-gray-300 text-gray-700 hover:bg-gradient-to-r hover:from-blue-400 hover:to-primary hover:text-white' }}">
                                     Semua Buku
                                 </button>
                                 <!-- Tab untuk kategori lainnya -->
                                 @foreach($categories as $category)
                                     <button type="submit" name="category_id" value="{{ $category->id }}" 
-                                        class="flex-shrink-0 px-4 py-2 rounded-md {{ request('category_id') == $category->id ? 'bg-gradient-to-r from-primary to-blue-400 text-white hover:bg-gradient-to-r hover:from-blue-400 hover:to-primary hover:text-white' : 'bg-gray-100 text-gray-700 hover:bg-gradient-to-r hover:from-blue-400 hover:to-primary hover:text-white' }}">
+                                        class="flex-shrink-0 px-4 py-2 rounded-md {{ request('category_id') == $category->id ? 'bg-gradient-to-r from-primary to-blue-400 text-white hover:bg-gradient-to-r hover:from-blue-400 hover:to-primary hover:text-white' : 'bg-gray-100  border border-gray-300 text-gray-700 hover:bg-gradient-to-r hover:from-blue-400 hover:to-primary hover:text-white' }}">
                                         {{ $category->name }}
                                     </button>
                                 @endforeach
@@ -71,7 +71,7 @@
                         <div class="flex flex-col items-start justify-between">
                             <div>
                             <div class="flex-shrink-0 overflow-hidden bg-white/30 border border-gray-300 p-4 mb-2 flex flex-col items-center justify-center h-52 w-full rounded-md">
-                                    <img src="{{ asset('storage/' . $book->image) }}" alt="{{ $book->title }}" class="w-full h-full object-contain object-center">
+                                    <img src="{{ asset('storage/' . $book->image) }}" alt="{{ $book->title }}" loading="lazy" class="w-full h-full object-contain object-center">
                                 </div>
                                 <h3 class="text-md font-bold leading-4 mb-2">{{ $book->title }}</h3>
                                 <p class="text-sm text-gray-600 leading-4 line-clamp-2 mb-2">{{ $book->description }}</p>
@@ -80,7 +80,7 @@
                                 <p class="text-sm leading-4 mb-4 {{ $book->stock > 0 ? 'text-green-600' : 'text-red-600' }}">
                                     Jumlah : {{ $book->stock }}
                                 </p>
-                                <a href="{{ route('books.show', $book->id) }}" class="bg-gradient-to-r from-blue-400 to-primary text-white py-2 px-5 rounded-md hover:bg-gradient-to-r hover:from-primary hover:to-blue-400 shadow-md">Detail Buku</a>
+                                <a href="{{ route('books.show', $book->id) }}" class="bg-gradient-to-r from-blue-400 to-primary text-white py-2 px-5 rounded-md hover:bg-gradient-to-r hover:from-primary hover:to-blue-400 shadow-md transition-all duration-300 ease-in-out">Detail Buku</a>
                             </div>
                         </div>
                     @empty
@@ -108,7 +108,6 @@
 
         @include('layouts.footer')
     </section>
-
 
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 </body>

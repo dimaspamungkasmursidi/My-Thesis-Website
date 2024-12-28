@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Member</title>
     @vite('resources/css/app.css')
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
 </head>
 <body class="bg-tertiary">
-    <section class="min-h-screen relative overflow-x-hidden py-8 px-4 md:px-20">
+    <section class="relative min-h-screen flex flex-col items-center justify-center overflow-x-hidden py-8 px-4 md:px-20">
     
-        <div class="flex items-center justify-between container mx-auto">
+        <div class="absolute top-8 px-4 flex items-center justify-between container mx-auto">
             <a href="javascript:history.back()" class="flex items-center gap-2 w-fit text-gray-500 hover:text-gray-700 font-medium group transition duration-300">
                 <span class="relative text-2xl">
                     <span class="absolute inset-0 text-gray-300 group-hover:text-gray-500 transition duration-300">&larr;</span>
@@ -73,10 +74,10 @@
                             class="w-full px-3 py-2 border rounded-lg focus:ring focus:ring-blue-200">
                     </div>
 
-                    <div class="mb-4 flex items-center">
+                    <!-- <div class="mb-4 flex items-center">
                         <input type="checkbox" name="remember" id="remember" class="mr-2">
                         <label for="remember" class="text-sm">Ingat Akun Saya</label>
-                    </div>
+                    </div> -->
 
                     <div>
                         <button type="submit" class="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-500">

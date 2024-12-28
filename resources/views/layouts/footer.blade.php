@@ -14,12 +14,15 @@
 
             <!-- Footer Section 2: Links -->
             <div class="flex flex-col items-center">
-                <h4 class="text-lg font-semibold text-black mb-4">Navigasi</h4>
-                <ul class="flex md:flex-col items-start text-gray-600 text-sm gap-6">
-                    <li><a href="{{ route('home') }}" class="hover:text-gray-300">Beranda</a></li>
-                    <li><a href="{{ route('allBook') }}" class="hover:text-gray-300">Semua Buku</a></li>
-                    <li><a href="{{ route('myBooking') }}" class="hover:text-gray-300">My Booking</a></li>
-                </ul>
+                <div class="flex flex-col items-center md:items-start">
+                    <h4 class="text-lg font-semibold text-black mb-4">Navigasi</h4>
+                    <ul class="flex flex-col items-center md:items-start text-gray-600 text-sm gap-6">
+                        <li><a href="{{ route('home') }}" class="hover:text-primary">Beranda</a></li>
+                        <li><a href="{{ route('allBook') }}" class="hover:text-primary">Semua Buku</a></li>
+                        <li><a href="{{ route('myBooking') }}" class="hover:text-primary">My Booking</a></li>
+                        <li><a href="{{ route('rules') }}" class="hover:text-primary">Panduan Perpustakaan</a></li>
+                    </ul>
+                </div>
             </div>
 
             <!-- Footer Section 3: Maps -->
