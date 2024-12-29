@@ -39,10 +39,27 @@
                         </p>
                     </div>
 
+                    <!-- Search -->
                     <div class="flex items-center justify-center mb-4">
-                        <input type="text" placeholder="Cari buku.." class="w-full md:w-1/2 bg-white/30 px-4 py-2 rounded-l-md border border-gray-300 focus:outline-none focus:border-primary">
-                        <button type="submit" class="px-4 py-2 bg-primary text-white rounded-r-md hover:bg-secondary">Cari</button>
+                        <form method="GET" action="{{ route('allBook') }}" class="flex w-full md:w-1/2">
+                            <input 
+                                type="text" 
+                                name="q" 
+                                value="{{ request('q') }}" 
+                                placeholder="Cari buku berdasarkan judul atau penulis..." 
+                                class="w-full bg-white/30 px-4 py-2 rounded-l-md border border-gray-300 focus:outline-none focus:border-primary"
+                            >
+                            <button 
+                                type="submit" 
+                                class="px-4 py-2 bg-primary text-white rounded-r-md hover:bg-secondary">
+                                Cari
+                            </button>
+                        </form>
                     </div>
+                    <!-- @if($books->isNotEmpty() && request()->filled('q'))
+                        <p class="text-gray-600">Menampilkan hasil pencarian terdekat untuk "{{ request('q') }}".</p>
+                    @endif -->
+
 
                     <!-- Filter Kategori -->
                     <div class="text-center flex md:items-center md:justify-center">

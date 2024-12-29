@@ -10,7 +10,7 @@
 <body class="bg-tertiary">
     <section class="relative min-h-screen flex flex-col items-center justify-center overflow-x-hidden py-8 px-4 md:px-20">
     
-        <div class="absolute top-8 px-4 flex items-center justify-between container mx-auto">
+        <div class="absolute top-8 px-4 md:px-20 flex items-center justify-between container mx-auto">
             <a href="javascript:history.back()" class="flex items-center gap-2 w-fit text-gray-500 hover:text-gray-700 font-medium group transition duration-300">
                 <span class="relative text-2xl">
                     <span class="absolute inset-0 text-gray-300 group-hover:text-gray-500 transition duration-300">&larr;</span>
@@ -25,7 +25,7 @@
             </a>
         </div>
 
-        <div class="flex items-center justify-center mt-8">
+        <div class="flex items-center justify-center mt-8 w-full">
 
                 <!-- Blur Background Elements -->
                 <div class="absolute w-[40rem] h-[40rem] top-0 left-[0rem] bg-primary/50 rounded-full blur-3xl -z-10"></div>
