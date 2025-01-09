@@ -55,5 +55,32 @@ class Book extends Model
             return $result['lev_score'] <= 5;
         }));
     }
+ 
+    public static function searchWithLevenshteinCategory($query, $categoryId)
+    {
+        $books = Book::where('category_id', $categoryId)->get();  // Filter berdasarkan kategori
+        $results = [];
+
+        foreach ($books as $book) {
+            $levTitle = levenshtein($query, $book->title);
+            $levAuthor = levenshtein($query, $book->author);
+
+            // Simpan hasil dengan skor Levenshtein
+            $results[] = [
+                'book' => $book,
+                'lev_score' => min($levTitle, $levAuthor),
+            ];
+        }
+
+        // Urutkan berdasarkan skor Levenshtein (skor kecil lebih relevan)
+        usort($results, function ($a, $b) {
+            return $a['lev_score'] <=> $b['lev_score'];
+        });
+
+        // Return hanya buku dengan skor threshold tertentu (contoh: <= 5)
+        return collect(array_filter($results, function ($result) {
+            return $result['lev_score'] <= 5;
+        }));
+    }
 
 }

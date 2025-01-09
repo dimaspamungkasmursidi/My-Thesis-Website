@@ -9,7 +9,7 @@ class Category extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name']; // Kolom yang bisa diisi
+    protected $fillable = ['name'];
 
     public function books()
     {

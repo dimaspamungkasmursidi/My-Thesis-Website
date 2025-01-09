@@ -18,7 +18,7 @@
                 <table class="min-w-full bg-gray-900 border-collapse border border-gray-700">
                     <thead class="bg-gradient-to-r from-gray-700 via-gray-800 to-gray-700">
                         <tr>
-                            <th class="text-left px-6 py-3 text-gray-100 text-sm font-semibold border-b border-gray-700">#</th>
+                            <th class="text-left px-6 py-3 text-gray-100 text-sm font-semibold border-b border-gray-700">No</th>
                             <th class="text-left px-6 py-3 text-gray-100 text-sm font-semibold border-b border-gray-700">Category Name</th>
                             <th class="text-left px-6 py-3 text-gray-100 text-sm font-semibold border-b border-gray-700">Action</th>
                         </tr>

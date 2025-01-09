@@ -16,8 +16,11 @@ class HomeController extends Controller
                       ->take(6)
                       ->get();
 
-        $newBook = Book::where('stock', '>=', 1)->orderBy('created_at', 'desc')->first();
-
+                      $newBook = Book::where('stock', '>', 0)
+                      ->orderBy('created_at', 'desc')
+                      ->take(10)
+                      ->get();
+                  
         return view('welcome', compact('books', 'newBook'));
     }
 
@@ -29,24 +32,36 @@ class HomeController extends Controller
         $books = collect();
 
         if (!empty($search)) {
-            // Full-Text Search
-            $books = Book::query()
-                ->whereRaw("MATCH(title, author) AGAINST(? IN BOOLEAN MODE)", [$search])
-                ->get();
-
-            // Jika tidak ada hasil, gunakan Levenshtein
-            if ($books->isEmpty()) {
-                $levResults = Book::searchWithLevenshtein($search);
-
-                // Extract buku dari hasil Levenshtein
-                $books = $levResults->pluck('book');
-            }
+            // Gunakan Levenshtein Distance untuk pencarian
+            $levResults = Book::searchWithLevenshtein($search);
+            $books = $levResults->pluck('book');  // Ambil objek Book dari hasil
         } else {
-            // Jika tidak mencari, ambil semua buku
-            $books = Book::with('category')->get();
+            // Jika tidak ada pencarian, tampilkan semua buku
+            $books = Book::all();
         }
 
         return view('allBook', compact('books', 'categories'));
     }
+    
+    public function bookCategory($categoryId)
+    {
+        $categories = Category::all();
+        $category = Category::findOrFail($categoryId);
+        
+        $search = request('q', '');
+        $books = collect();
+    
+        if (!empty($search)) {
+            // Gunakan Levenshtein Distance untuk pencarian berdasarkan kategori
+            $levResults = Book::searchWithLevenshteinCategory($search, $categoryId);
+            $books = $levResults->pluck('book');  // Ambil objek Book dari hasil
+        } else {
+            // Menampilkan buku berdasarkan kategori
+            $books = Book::where('category_id', $categoryId)->get();
+        }
+    
+        return view('bookCategory', compact('books', 'category', 'categories'));
+    }
+    
 
 }

@@ -80,10 +80,10 @@
                 <h1 class="hidden md:block text-5xl font-bold text-center md:text-left mb-2">Sistem Informasi Perpustakaan <br> <span class="text-primary">Desa Babelan Kota</span></h1>
                 <p class="text-lg text-center md:text-left text-gray-600 leading-relaxed mb-4">Nikmati Kemudahan Mencari Buku. Akses Informasi Koleksi dan Booking Sebelum Berkunjung.</p>
                 <form action="">
-                    <div class="flex items-center justify-center md:justify-start">
-                        <input type="text" placeholder="Cari buku" class="w-full md:w-1/2 px-4 py-2 rounded-l-md border border-gray-300 focus:outline-none focus:border-primary">
+                    <a href="{{ route('allBook') }}" class="md:w-4/5 flex items-center justify-center md:justify-start">
+                        <input type="text" placeholder="Cari buku" class="w-full px-4 py-2 rounded-l-md border border-gray-300 focus:outline-none focus:border-primary">
                         <button type="submit" class="px-4 py-2 bg-primary text-white rounded-r-md hover:bg-secondary transition duration-300 ease-in-out">Cari</button>
-                    </div>
+                    </a>
                 </form>
             </div>
             <div class="md:w-1/2 flex-shrink-0">
@@ -101,11 +101,11 @@
             <h1 class="text-3xl font-bold text-center mb-6 animate-fadeIn">Update Buku Terbaru!</h1>
 
             <div class="flex overflow-x-auto gap-4 py-4 -mx-4 px-4 scrollbar-hide">
-                @foreach ($books as $book)
+                @foreach ($newBook as $book)
                     <div 
-                        class="flex-shrink-0 w-52 bg-white/30 border border-gray-300 rounded-lg overflow-hidden hover:scale-105 transition-transform duration-300 animate-slideUp"
+                        class="flex-shrink-0 w-36 bg-white/30 border border-gray-300 rounded-lg overflow-hidden hover:scale-105 transition-transform duration-300 animate-slideUp"
                     >
-                        <div class="relative h-80">
+                        <div class="relative h-64">
                             <img 
                                 src="{{ asset('storage/' . $book->image) }}" 
                                 alt="{{ $book->title }}"
@@ -127,73 +127,8 @@
             </div>
         </div>
 
-        <!-- Slider Quotes -->
-        <section class="container mx-auto py-16 px-4 md:px-20 text-center">
-            <h2 class="text-3xl font-bold">Quotes</h2>
-            <div class="relative">
-                <!-- Slider Container -->
-                <div class="slider-container">
-                    <div class="slider-wrapper">
-                        <!-- Slide 1 -->
-                        <div class="slider-slide flex justify-center items-center py-8">
-                            <div class="bg-primary/20 p-8 px-10 rounded-xl shadow-xl max-w-2xl w-full border border-gray-300">
-                                <p class="text-lg text-gray-800 italic">"Perpustakaan adalah jendela dunia, dan siapa pun yang mengunjungi akan melihat dunia yang tak terbatas." - Anonymous</p>
-                                <div class="mt-4">
-                                    <h4 class="font-semibold text-gray-900">Anonymous</h4>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Slide 2 -->
-                        <div class="slider-slide flex justify-center items-center py-8">
-                            <div class="bg-primary/20 p-8 px-10 rounded-xl shadow-xl max-w-2xl w-full border border-gray-300">
-                                <p class="text-lg text-gray-800 italic">"Buku adalah teman terbaik yang tak akan pernah mengecewakanmu." - Charles W. Eliot</p>
-                                <div class="mt-4">
-                                    <h4 class="font-semibold text-gray-900">Charles W. Eliot</h4>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Slide 3 -->
-                        <div class="slider-slide flex justify-center items-center py-8">
-                            <div class="bg-primary/20 p-8 px-10 rounded-xl shadow-xl max-w-2xl w-full border border-gray-300">
-                                <p class="text-lg text-gray-800 italic">"Membaca adalah pelarian yang tidak pernah bisa dihentikan." - Virginia Woolf</p>
-                                <div class="mt-4">
-                                    <h4 class="font-semibold text-gray-900">Virginia Woolf</h4>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Slide 4 -->
-                        <div class="slider-slide flex justify-center items-center py-8">
-                            <div class="bg-primary/20 p-8 px-10 rounded-xl shadow-xl max-w-2xl w-full border border-gray-300">
-                                <p class="text-lg text-gray-800 italic">"Perpustakaan adalah tempat terbaik untuk memulai perjalanan tanpa batas." - Oprah Winfrey</p>
-                                <div class="mt-4">
-                                    <h4 class="font-semibold text-gray-900">Oprah Winfrey</h4>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Slide 5 -->
-                        <div class="slider-slide flex justify-center items-center py-8">
-                            <div class="bg-primary/20 p-8 px-10 rounded-xl shadow-xl max-w-2xl w-full border border-gray-300">
-                                <p class="text-lg text-gray-800 italic">"Buku adalah sumber daya untuk membuat dunia lebih baik." - Barack Obama</p>
-                                <div class="mt-4">
-                                    <h4 class="font-semibold text-gray-900">Barack Obama</h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Prev and Next Buttons -->
-                    <div class="prev-btn absolute top-1/2 left-0 transform -translate-y-1/2 bg-primary/30 text-black text-2xl py-1 px-2 rounded-full transition-all hover:scale-110">
-                    &larr;
-                    </div>
-                    <div class="next-btn absolute top-1/2 right-0 transform -translate-y-1/2 bg-primary/30 text-black text-2xl py-1 px-2 rounded-full transition-all hover:scale-110">
-                    &rarr;
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <!-- Book Suggestions Section -->
-        <section id="books" class="pb-20 px-4 md:px-20">
+        <section id="books" class="py-20 px-4 md:px-20">
             <div class="container mx-auto">
                 <h2 class="text-3xl font-bold mb-8 text-center">Rekomendasi Buku Keren Buat Kamu</h2>
                 <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
@@ -228,6 +163,64 @@
                             </a>
                         </div>
                     @endforelse
+                </div>
+            </div>
+        </section>
+
+        <!-- Slider Quotes -->
+        <section class="container mx-auto pb-16 px-4 md:px-20 text-center">
+            <h2 class="text-3xl font-bold">Quotes</h2>
+            <div class="relative">
+                <div class="slider-container">
+                    <div class="slider-wrapper">
+                        <div class="slider-slide flex justify-center items-center py-8">
+                            <div class="bg-primary/10 p-8 px-10 rounded-xl shadow-xl max-w-2xl w-full border border-gray-300">
+                                <p class="text-lg text-gray-800 italic">"Perpustakaan adalah jendela dunia, dan siapa pun yang mengunjungi akan melihat dunia yang tak terbatas." - Anonymous</p>
+                                <div class="mt-4">
+                                    <h4 class="font-semibold text-gray-900">Anonymous</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slider-slide flex justify-center items-center py-8">
+                            <div class="bg-primary/10 p-8 px-10 rounded-xl shadow-xl max-w-2xl w-full border border-gray-300">
+                                <p class="text-lg text-gray-800 italic">"Buku adalah teman terbaik yang tak akan pernah mengecewakanmu." - Charles W. Eliot</p>
+                                <div class="mt-4">
+                                    <h4 class="font-semibold text-gray-900">Charles W. Eliot</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slider-slide flex justify-center items-center py-8">
+                            <div class="bg-primary/10 p-8 px-10 rounded-xl shadow-xl max-w-2xl w-full border border-gray-300">
+                                <p class="text-lg text-gray-800 italic">"Membaca adalah pelarian yang tidak pernah bisa dihentikan." - Virginia Woolf</p>
+                                <div class="mt-4">
+                                    <h4 class="font-semibold text-gray-900">Virginia Woolf</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slider-slide flex justify-center items-center py-8">
+                            <div class="bg-primary/10 p-8 px-10 rounded-xl shadow-xl max-w-2xl w-full border border-gray-300">
+                                <p class="text-lg text-gray-800 italic">"Perpustakaan adalah tempat terbaik untuk memulai perjalanan tanpa batas." - Oprah Winfrey</p>
+                                <div class="mt-4">
+                                    <h4 class="font-semibold text-gray-900">Oprah Winfrey</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slider-slide flex justify-center items-center py-8">
+                            <div class="bg-primary/10 p-8 px-10 rounded-xl shadow-xl max-w-2xl w-full border border-gray-300">
+                                <p class="text-lg text-gray-800 italic">"Buku adalah sumber daya untuk membuat dunia lebih baik." - Barack Obama</p>
+                                <div class="mt-4">
+                                    <h4 class="font-semibold text-gray-900">Barack Obama</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="prev-btn absolute top-1/2 left-0 transform -translate-y-1/2 bg-primary/30 text-black text-2xl py-1 px-2 rounded-full transition-all hover:scale-110">
+                    &larr;
+                    </div>
+                    <div class="next-btn absolute top-1/2 right-0 transform -translate-y-1/2 bg-primary/30 text-black text-2xl py-1 px-2 rounded-full transition-all hover:scale-110">
+                    &rarr;
+                    </div>
                 </div>
             </div>
         </section>
