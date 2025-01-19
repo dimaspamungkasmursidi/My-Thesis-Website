@@ -7,23 +7,23 @@
 
     <section class="container mx-auto sm:p-8 sm:pt-12">
 
+    @if ($errors->any())
+        <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-4 rounded-md" role="alert">
+            <p class="font-bold">Terjadi Kesalahan:</p>
+            <ul class="list-disc list-inside">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-
-        @if (session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
-        @endif
-
+    @if (session('success'))
+        <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-4 rounded-md" role="alert">
+            <p class="font-bold">Berhasil!</p>
+            <p>{{ session('success') }}</p>
+        </div>
+    @endif
 
         <form action="{{ route('books.store') }}" method="POST" enctype="multipart/form-data" class="bg-gray-800 p-8 sm:rounded-lg shadow-lg space-y-4">
             @csrf

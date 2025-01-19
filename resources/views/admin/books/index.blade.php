@@ -15,11 +15,38 @@
 
     <section class="container mx-auto sm:p-8 sm:pt-12">
         <section class="bg-gray-800 p-8 sm:rounded-lg shadow-lg space-y-4">
+
             <div class="flex justify-start">
                 <a href="{{ route('books.creates') }}"
                 class="inline-block bg-gradient-to-r from-purple-500 to-indigo-600 text-white font-semibold px-6 py-2 rounded-lg shadow-md hover:from-indigo-600 hover:to-purple-500 transition duration-300">
                     Add New Book
                 </a>
+            </div>
+
+            <!-- Search -->
+            <div class="flex justify-between items-center mb-4">
+                <form action="{{ route('books.index') }}" method="GET" class="w-full flex space-x-2">
+                    <input 
+                        type="text" 
+                        name="search" 
+                        value="{{ request('search') }}" 
+                        placeholder="Search books..." 
+                        class="w-full px-4 py-2 rounded-lg border border-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500 bg-gray-800 text-white"
+                    />
+                    <button 
+                        type="submit" 
+                        class="bg-gradient-to-r from-purple-500 to-indigo-600 text-white px-4 py-2 rounded-lg shadow-md hover:from-indigo-600 hover:to-purple-500 transition duration-300">
+                        Search
+                    </button>
+                </form>
+            </div>
+
+            <div>
+                @if($books->isEmpty())
+                    <p class="text-gray-400 text-center">No books found based on your search.</p>
+                @else
+                    <p class="text-gray-200 text-sm">Books: {{ $books->count() }}</p>
+                @endif
             </div>
 
             <div class="overflow-x-auto bg-gray-800 shadow-md rounded-lg">

@@ -5,10 +5,10 @@
         </h2>
     </x-slot>
 
-
     @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
+        <div class="bg-red-700/30 border-l-4 border-red-600 text-red-100 p-4 mb-6 rounded-md" role="alert">
+            <h2 class="font-bold text-lg mb-2">Terjadi Kesalahan</h2>
+            <ul class="list-disc list-inside space-y-1">
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
                 @endforeach
@@ -17,8 +17,9 @@
     @endif
 
     @if (session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
+        <div class="bg-green-700/30 border-l-4 border-green-500 text-green-300 p-4 mb-6 rounded-md" role="alert">
+            <h2 class="font-bold text-lg">Sukses!</h2>
+            <p>{{ session('success') }}</p>
         </div>
     @endif
 
@@ -41,8 +42,6 @@
                         <img src="{{ asset('storage/' . $book->image) }}" alt="Book Image Preview"
                         class="w-32 h-32 mt-4 rounded-md object-cover border-2 border-indigo-500">
                     @endif
-                    {{-- <img src="/path/to/existing-image.jpg" alt="Book Image Preview"
-                    class="w-32 h-32 mt-4 rounded-md object-cover border-2 border-gray-500"> --}}
             </div>
 
             <!-- Title -->

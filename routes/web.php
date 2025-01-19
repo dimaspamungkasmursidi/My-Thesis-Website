@@ -16,10 +16,10 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/books/{book}', [BookController::class, 'show'])->name('books.show');
 Route::get('/allBook/{categoryId}', [HomeController::class, 'indexByCategory'])->name('books.category');
 Route::get('/allBook', [HomeController::class, 'allBook'])->name('allBook');
+Route::get('/bookCategory{category}', [HomeController::class, 'bookCategory'])->name('bookCategory');
 Route::get('/rules', function () {
     return view('rules');
 })->name('rules');
-Route::get('/bookCategory{category}', [HomeController::class, 'bookCategory'])->name('bookCategory');
 
 
 Route::prefix('member')->group(function () {

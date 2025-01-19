@@ -25,23 +25,29 @@ class HomeController extends Controller
     }
 
     // All Books Page
-    public function allBook()
+    public function allBook(Request $request)
     {
-        $categories = Category::all();
-        $search = request('q', '');
-        $books = collect();
-
-        if (!empty($search)) {
-            // Gunakan Levenshtein Distance untuk pencarian
-            $levResults = Book::searchWithLevenshtein($search);
-            $books = $levResults->pluck('book');  // Ambil objek Book dari hasil
+        $categories = Category::all(); // Mengambil semua kategori
+        $books = Book::query(); // Query awal untuk buku
+    
+        // Jika ada pencarian
+        if ($request->has('q') && !empty($request->q)) {
+            $searchTerm = strtolower($request->q);
+    
+            // Ambil semua buku untuk diproses dengan Levenshtein
+            $books = $books->get()->filter(function ($book) use ($searchTerm) {
+                $titleDistance = levenshtein(strtolower($book->title), $searchTerm);
+                $authorDistance = levenshtein(strtolower($book->author), $searchTerm);
+    
+                // Ambang batas jarak karakter
+                return $titleDistance <= 5 || $authorDistance <= 5;
+            });
         } else {
-            // Jika tidak ada pencarian, tampilkan semua buku
-            $books = Book::all();
+            $books = $books->get(); // Jika tidak ada pencarian, ambil semua buku
         }
-
-        return view('allBook', compact('books', 'categories'));
-    }
+    
+        return view('allBook', compact('categories', 'books'));
+    }    
     
     public function bookCategory($categoryId)
     {

@@ -5,24 +5,33 @@ namespace App\Http\Controllers;
 use App\Models\Book;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 
 class BookController extends Controller
 {
 
+
     public function index(Request $request)
     {
-        $categories = Category::all(); // Ambil semua kategori
-        $books = Book::with('category'); // Ambil buku dengan kategori
+        $categories = Category::all();
+        $books = Book::with('category')->get(); // Ambil semua buku untuk perhitungan
     
-        // Filter buku berdasarkan kategori jika parameter 'category_id' ada di request
-        if ($request->has('category_id')) {
-            $books = $books->where('category_id', $request->category_id);
+        // Pencarian menggunakan Levenshtein
+        if ($request->has('search') && !empty($request->search)) {
+            $searchTerm = strtolower($request->search);
+            
+            // Filter buku dengan Levenshtein Distance
+            $books = $books->filter(function ($book) use ($searchTerm) {
+                $titleDistance = levenshtein(strtolower($book->title), $searchTerm);
+                $authorDistance = levenshtein(strtolower($book->author), $searchTerm);
+    
+                // Ambil hanya yang memiliki jarak di bawah ambang batas (misalnya 5 karakter)
+                return $titleDistance <= 5 || $authorDistance <= 5;
+            });
         }
     
-        $books = $books->get();
-
-        return view('admin.books.index', compact('books'));
-    }
+        return view('admin.books.index', compact('books', 'categories'));
+    }    
 
     public function create()
     {

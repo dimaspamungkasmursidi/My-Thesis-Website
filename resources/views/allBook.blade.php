@@ -79,14 +79,15 @@
 
                 </div>
 
+                <!-- Display Books -->
                 <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
                     @forelse($books as $book)
                         <div class="flex flex-col items-start justify-between">
                             <div>
-                            <div class="flex-shrink-0 overflow-hidden bg-white/30 border border-gray-300 p-4 mb-2 flex flex-col items-center justify-center h-52 w-full rounded-md">
+                                <div class="flex-shrink-0 overflow-hidden bg-white/30 border border-gray-300 p-4 mb-2 flex flex-col items-center justify-center h-52 w-full rounded-md">
                                     <img src="{{ asset('storage/' . $book->image) }}" alt="{{ $book->title }}" loading="lazy" class="w-full h-full object-contain object-center">
                                 </div>
-                                <h3 class="text-md font-bold leading-4 mb-2">{{ $book->title }}</h3>
+                                <h3 class="text-md font-bold leading-4 mb-2 line-clamp-1">{{ $book->title }}</h3>
                                 <p class="text-sm text-gray-600 leading-4 line-clamp-2 mb-2">{{ $book->description }}</p>
                             </div>
                             <div>
@@ -97,21 +98,21 @@
                             </div>
                         </div>
                     @empty
-                        <!-- No Books Available -->
-                    <div class="col-span-2 sm:col-span-3 md:col-span-4 lg:col-span-5 xl:col-span-6 flex flex-col items-center justify-center text-center py-12">
-                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 64 64" enable-background="new 0 0 64 64" class="w-80 h-80 mb-6">
-                            <circle cx="32" cy="32" r="23" fill="#fd3c4f"></circle><ellipse cx="32" cy="61" opacity=".3" rx="19" ry="3"></ellipse><path fill="#fff" d="M32,14c2.577,0,4.674-1.957,4.946-4.461C35.352,9.19,33.699,9,32,9 C19.297,9,9,19.297,9,32c0,1.699,0.19,3.352,0.539,4.946C12.044,36.674,14,34.577,14,32C14,22.075,22.075,14,32,14z" opacity=".3"></path><path fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="3" d="M15.047,23.427c1.878-3.699,4.932-6.705,8.666-8.522"></path><path d="M54.461,27.054C51.956,27.326,50,29.423,50,32c0,9.925-8.075,18-18,18 c-2.577,0-4.674,1.957-4.946,4.461C28.648,54.81,30.301,55,32,55c12.703,0,23-10.297,23-23C55,30.301,54.81,28.648,54.461,27.054z" opacity=".15"></path><circle cx="32" cy="32" r="16" fill="#37d0ee"></circle><rect width="8" height="43.841" x="28" y="10.08" fill="#fd3c4f" transform="rotate(45.001 32 32)"></rect>
-                        </svg>
-                        <h3 class="text-2xl font-bold text-gray-700 mb-2">Oops! Tidak Ada Buku Saat Ini</h3>
-                        <p class="text-gray-600 mb-4">
-                            Kami sedang memperbarui koleksi buku kami. Harap cek kembali nanti atau hubungi staf perpustakaan untuk informasi lebih lanjut.
-                        </p>
-                        <a href="{{ route('home') }}" class="bg-primary text-white py-2 px-5 rounded-lg hover:bg-secondary">
-                            Kembali ke Beranda
-                        </a>
-                    </div>
+                        <div class="col-span-2 sm:col-span-3 md:col-span-4 lg:col-span-5 xl:col-span-6 flex flex-col items-center justify-center text-center py-12">
+                            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 64 64" enable-background="new 0 0 64 64" class="w-40 h-40 mb-4">
+                                <circle cx="32" cy="32" r="23" fill="#fd3c4f"></circle><ellipse cx="32" cy="61" opacity=".3" rx="19" ry="3"></ellipse><path fill="#fff" d="M32,14c2.577,0,4.674-1.957,4.946-4.461C35.352,9.19,33.699,9,32,9 C19.297,9,9,19.297,9,32c0,1.699,0.19,3.352,0.539,4.946C12.044,36.674,14,34.577,14,32C14,22.075,22.075,14,32,14z" opacity=".3"></path><path fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="3" d="M15.047,23.427c1.878-3.699,4.932-6.705,8.666-8.522"></path><path d="M54.461,27.054C51.956,27.326,50,29.423,50,32c0,9.925-8.075,18-18,18 c-2.577,0-4.674,1.957-4.946,4.461C28.648,54.81,30.301,55,32,55c12.703,0,23-10.297,23-23C55,30.301,54.81,28.648,54.461,27.054z" opacity=".15"></path><circle cx="32" cy="32" r="16" fill="#37d0ee"></circle><rect width="8" height="43.841" x="28" y="10.08" fill="#fd3c4f" transform="rotate(45.001 32 32)"></rect>
+                            </svg>
+                            <h3 class="text-2xl font-bold text-gray-700 mb-2">Oops! Tidak Ada Buku Ditemukan</h3>
+                            <p class="text-gray-600 mb-4">
+                                Wah ga ada buku yang cocok nih dengan pencarian "{{ request('q') }}". Coba pakai kata kunci lain.
+                            </p>
+                            <a href="{{ route('allBook') }}" class="bg-primary text-white py-2 px-5 rounded-lg hover:bg-secondary">
+                                Lihat Semua Buku
+                            </a>
+                        </div>
                     @endforelse
                 </div>
+
             </div>
         </section>
 
