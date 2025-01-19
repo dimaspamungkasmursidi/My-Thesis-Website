@@ -93,7 +93,7 @@ class BookController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'author' => 'required|string|max:255',
-            'category_id' => 'required|exists:categories,id', // Validasi kategori_id
+            'category_id' => 'required|exists:categories,id',
             'year' => 'required|integer',
             'description' => 'required|string',
             'stock' => 'required|integer|min:0',
@@ -101,7 +101,7 @@ class BookController extends Controller
         ]);
 
         if ($request->hasFile('image')) {
-            if ($book->image){
+            if ($book->image && file_exists(storage_path('app/public/' . $book->image))) {
                 unlink(storage_path('app/public/' . $book->image));
             }
             $imagePath = $request->file('image')->store('books', 'public');
@@ -110,7 +110,7 @@ class BookController extends Controller
 
         $book->title = $request->title;
         $book->author = $request->author;
-        $book->category_id = $request->category_id; // Update kategori_id
+        $book->category_id = $request->category_id;
         $book->year = $request->year;
         $book->description = $request->description;
         $book->stock = $request->stock;

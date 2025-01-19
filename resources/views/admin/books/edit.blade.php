@@ -24,7 +24,7 @@
     @endif
 
     <section class="container mx-auto sm:p-8 sm:pt-12">
-        <form action="{{ route('books.update', $book->id) }}" method="POST" class="bg-gray-800 p-8 sm:rounded-lg shadow-lg space-y-4">
+        <form action="{{ route('books.update', $book->id) }}" method="POST" enctype="multipart/form-data" class="bg-gray-800 p-8 sm:rounded-lg shadow-lg space-y-4">
             @csrf
             @method('PUT')
             <!-- Title Section -->
@@ -47,7 +47,7 @@
             <!-- Title -->
             <div>
                 <label for="title" class="block text-sm font-medium text-gray-200">Title</label>
-                <input type="text" id="title" name="title" value={{ $book->title }} required
+                <input type="text" id="title" name="title" value="{{ $book->title }}" required
                     class="mt-1 block w-full rounded-md bg-gray-900 border-gray-500 text-gray-200 shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
             </div>
 
