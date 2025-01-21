@@ -49,25 +49,32 @@ class HomeController extends Controller
         return view('allBook', compact('categories', 'books'));
     }    
     
-    public function bookCategory($categoryId)
+    public function bookCategory($categoryId, Request $request)
     {
-        $categories = Category::all();
-        $category = Category::findOrFail($categoryId);
-        
-        $search = request('q', '');
-        $books = collect();
+        $categories = Category::all(); // Mengambil semua kategori
+        $category = Category::findOrFail($categoryId); // Mendapatkan kategori berdasarkan ID
+        $books = collect(); // Koleksi awal kosong
     
-        if (!empty($search)) {
-            // Gunakan Levenshtein Distance untuk pencarian berdasarkan kategori
-            $levResults = Book::searchWithLevenshteinCategory($search, $categoryId);
-            $books = $levResults->pluck('book');  // Ambil objek Book dari hasil
+        // Ambil query pencarian
+        $searchTerm = strtolower($request->input('q', ''));
+    
+        if (!empty($searchTerm)) {
+            // Jika ada pencarian, filter buku menggunakan Levenshtein Distance
+            $books = Book::where('category_id', $categoryId)->get()->filter(function ($book) use ($searchTerm) {
+                $titleDistance = levenshtein(strtolower($book->title), $searchTerm);
+                $authorDistance = levenshtein(strtolower($book->author), $searchTerm);
+    
+                // Ambang batas jarak karakter
+                return $titleDistance <= 5 || $authorDistance <= 5;
+            });
         } else {
-            // Menampilkan buku berdasarkan kategori
+            // Jika tidak ada pencarian, ambil semua buku dalam kategori
             $books = Book::where('category_id', $categoryId)->get();
         }
     
         return view('bookCategory', compact('books', 'category', 'categories'));
     }
+    
     
 
 }

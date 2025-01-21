@@ -7,6 +7,25 @@
 
     <section class="container mx-auto sm:p-8 sm:pt-12">
         <section class="bg-gray-800 p-8 sm:rounded-lg shadow-lg space-y-4">
+
+        <!-- Search -->
+        <div class="flex justify-between items-center mb-4">
+            <form action="{{ route('members') }}" method="GET" class="w-full flex space-x-2">
+                <input 
+                    type="text" 
+                    name="search" 
+                    value="{{ request('search') }}" 
+                    placeholder="Search members..." 
+                    class="w-full px-4 py-2 rounded-lg border border-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-500 bg-gray-800 text-white"
+                />
+                <button 
+                    type="submit" 
+                    class="bg-gradient-to-r from-purple-500 to-indigo-600 text-white px-4 py-2 rounded-lg shadow-md hover:from-indigo-600 hover:to-purple-500 transition duration-300">
+                    Search
+                </button>
+            </form>
+        </div>
+
             <div class="overflow-x-auto bg-gray-800 shadow-md rounded-lg">
                 <table class="table-auto w-full border-collapse border border-gray-700">
                     <thead class="bg-gradient-to-r from-gray-700 via-gray-800 to-gray-700">

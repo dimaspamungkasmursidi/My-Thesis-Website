@@ -18,14 +18,21 @@ class AdminDashboardController extends Controller
         return view('dashboard', compact('totalBooks', 'totalMembers', 'totalAdmin'));
     }
 
-    public function members()
+    public function members(Request $request)
     {
-        $members = member::paginate(10);
-
+        $search = $request->get('search');
+        $membersQuery = member::query();
+    
+        if ($search) {
+            $membersQuery->where('name', 'LIKE', "%{$search}%")
+                         ->orWhere('email', 'LIKE', "%{$search}%");
+        }
+    
+        $members = $membersQuery->paginate(10);
+    
         return view('admin.members.index', compact('members'));
     }
-
-
+    
     public function destroy($id)
     {
         $member = Member::findOrFail($id);
