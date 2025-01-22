@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>My Library</title>
+    <title>Perpustakaan Desa Babelan Kota</title>
     <link rel="icon" href="{{ asset(path: 'images/logo.png') }}" type="image/x-icon">
     @vite('resources/css/app.css')
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
@@ -176,15 +176,31 @@
                     <div class="slider-wrapper">
                         <div class="slider-slide flex justify-center items-center py-8">
                             <div class="bg-primary/10 p-8 px-10 rounded-xl shadow-xl max-w-2xl w-full border border-gray-300">
-                                <p class="text-lg text-gray-800 italic">"Perpustakaan adalah jendela dunia, dan siapa pun yang mengunjungi akan melihat dunia yang tak terbatas." - Anonymous</p>
+                                <p class="text-lg text-gray-800 italic">"Satu-satunya hal yang benar-benar harus Anda ketahui adalah lokasi perpustakaan."</p>
                                 <div class="mt-4">
-                                    <h4 class="font-semibold text-gray-900">Anonymous</h4>
+                                    <h4 class="font-semibold text-gray-900">Albert Einstein</h4>
                                 </div>
                             </div>
                         </div>
                         <div class="slider-slide flex justify-center items-center py-8">
                             <div class="bg-primary/10 p-8 px-10 rounded-xl shadow-xl max-w-2xl w-full border border-gray-300">
-                                <p class="text-lg text-gray-800 italic">"Buku adalah teman terbaik yang tak akan pernah mengecewakanmu." - Charles W. Eliot</p>
+                                <p class="text-lg text-gray-800 italic">"Buku-buku adalah teman yang tak pernah meninggalkan kita."</p>
+                                <div class="mt-4">
+                                    <h4 class="font-semibold text-gray-900">Tere Liye</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slider-slide flex justify-center items-center py-8">
+                            <div class="bg-primary/10 p-8 px-10 rounded-xl shadow-xl max-w-2xl w-full border border-gray-300">
+                                <p class="text-lg text-gray-800 italic">"Literasi bukan hanya tentang membaca dan menulis, tetapi juga tentang membuka pintu-pintu pengetahuan dan peluang."</p>
+                                <div class="mt-4">
+                                    <h4 class="font-semibold text-gray-900">Najwa Shihab</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slider-slide flex justify-center items-center py-8">
+                            <div class="bg-primary/10 p-8 px-10 rounded-xl shadow-xl max-w-2xl w-full border border-gray-300">
+                                <p class="text-lg text-gray-800 italic">"Buku adalah teman terbaik yang tak akan pernah mengecewakanmu."</p>
                                 <div class="mt-4">
                                     <h4 class="font-semibold text-gray-900">Charles W. Eliot</h4>
                                 </div>
@@ -192,7 +208,23 @@
                         </div>
                         <div class="slider-slide flex justify-center items-center py-8">
                             <div class="bg-primary/10 p-8 px-10 rounded-xl shadow-xl max-w-2xl w-full border border-gray-300">
-                                <p class="text-lg text-gray-800 italic">"Membaca adalah pelarian yang tidak pernah bisa dihentikan." - Virginia Woolf</p>
+                                <p class="text-lg text-gray-800 italic">"Bangsa yang gemar membaca adalah bangsa yang memimpin."</p>
+                                <div class="mt-4">
+                                    <h4 class="font-semibold text-gray-900">Jhon F. Kennedy</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slider-slide flex justify-center items-center py-8">
+                            <div class="bg-primary/10 p-8 px-10 rounded-xl shadow-xl max-w-2xl w-full border border-gray-300">
+                                <p class="text-lg text-gray-800 italic">"Buku adalah keajaiban yang dapat dibawa ke mana saja."</p>
+                                <div class="mt-4">
+                                    <h4 class="font-semibold text-gray-900">Stephen Hawking</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slider-slide flex justify-center items-center py-8">
+                            <div class="bg-primary/10 p-8 px-10 rounded-xl shadow-xl max-w-2xl w-full border border-gray-300">
+                                <p class="text-lg text-gray-800 italic">"Membaca adalah pelarian yang tidak pernah bisa dihentikan."</p>
                                 <div class="mt-4">
                                     <h4 class="font-semibold text-gray-900">Virginia Woolf</h4>
                                 </div>
@@ -200,7 +232,7 @@
                         </div>
                         <div class="slider-slide flex justify-center items-center py-8">
                             <div class="bg-primary/10 p-8 px-10 rounded-xl shadow-xl max-w-2xl w-full border border-gray-300">
-                                <p class="text-lg text-gray-800 italic">"Perpustakaan adalah tempat terbaik untuk memulai perjalanan tanpa batas." - Oprah Winfrey</p>
+                                <p class="text-lg text-gray-800 italic">"Perpustakaan adalah tempat terbaik untuk memulai perjalanan tanpa batas."</p>
                                 <div class="mt-4">
                                     <h4 class="font-semibold text-gray-900">Oprah Winfrey</h4>
                                 </div>
@@ -208,7 +240,7 @@
                         </div>
                         <div class="slider-slide flex justify-center items-center py-8">
                             <div class="bg-primary/10 p-8 px-10 rounded-xl shadow-xl max-w-2xl w-full border border-gray-300">
-                                <p class="text-lg text-gray-800 italic">"Buku adalah sumber daya untuk membuat dunia lebih baik." - Barack Obama</p>
+                                <p class="text-lg text-gray-800 italic">"Buku adalah sumber daya untuk membuat dunia lebih baik."</p>
                                 <div class="mt-4">
                                     <h4 class="font-semibold text-gray-900">Barack Obama</h4>
                                 </div>
@@ -216,10 +248,10 @@
                         </div>
                     </div>
 
-                    <div class="prev-btn absolute top-1/2 left-0 transform -translate-y-1/2 bg-primary/30 text-black text-2xl py-1 px-2 rounded-full transition-all hover:scale-110">
+                    <div class="prev-btn absolute top-1/2 left-2 transform -translate-y-1/2 bg-primary/30 text-black text-2xl py-1 px-2.5 rounded-full transition-all hover:scale-110">
                     &larr;
                     </div>
-                    <div class="next-btn absolute top-1/2 right-0 transform -translate-y-1/2 bg-primary/30 text-black text-2xl py-1 px-2 rounded-full transition-all hover:scale-110">
+                    <div class="next-btn absolute top-1/2 right-2 transform -translate-y-1/2 bg-primary/30 text-black text-2xl py-1 px-2.5 rounded-full transition-all hover:scale-110">
                     &rarr;
                     </div>
                 </div>

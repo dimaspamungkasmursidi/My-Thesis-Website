@@ -72,19 +72,19 @@
             <!-- Author -->
             <div>
                 <label for="author" class="block text-sm font-medium text-gray-200">Author</label>
-                <input type="text" id="author" name="author" value={{ $book->author }} required
+                <input type="text" id="author" name="author" value="{{ $book->author }}" required
                     class="mt-1 block w-full rounded-md bg-gray-900 border-gray-500 text-gray-200 shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
             </div>
             <!-- Year -->
             <div>
                 <label for="year" class="block text-sm font-medium text-gray-200">Year</label>
-                <input type="number" id="year" name="year" value={{ $book->year }} required
+                <input type="number" id="year" name="year" value="{{ $book->year }}" required
                     class="mt-1 block w-full rounded-md bg-gray-900 border-gray-500 text-gray-200 shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
             </div>
             <!-- Stock -->
             <div>
                 <label for="stock" class="block text-sm font-medium text-gray-200">Stock</label>
-                <input type="number" id="stock" name="stock" value={{ $book->stock }} required
+                <input type="number" id="stock" name="stock" value="{{ $book->stock }}" required
                     class="mt-1 block w-full rounded-md bg-gray-900 border-gray-500 text-gray-200 shadow-sm placeholder:text-gray-400 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
             </div>
             <!-- Submit Button -->
