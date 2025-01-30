@@ -9,12 +9,8 @@
 
     @if ($errors->any())
         <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-4 rounded-md" role="alert">
-            <p class="font-bold">Terjadi Kesalahan:</p>
-            <ul class="list-disc list-inside">
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
+            <p class="font-bold mb-2">Terjadi Kesalahan:</p>
+            <pre class="whitespace-pre-line leading-none">{{ $errors->first('error') }}</pre>
         </div>
     @endif
 

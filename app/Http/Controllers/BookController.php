@@ -68,7 +68,16 @@ class BookController extends Controller
 
         return redirect()->route('books.index')->with('success', 'Book created successfully!');
         } catch (\Exception $e) {
-            return back()->withErrors(['error' => 'Failed to create book: ' . $e->getMessage()]);
+            return back()->withErrors([
+                'error' => "Gagal menambahkan buku! Pastikan semua data yang dimasukkan sudah benar:\n
+                - Gambar: Harus dalam format JPEG, PNG, JPG, atau GIF dengan ukuran maksimal 2MB.\n
+                - Judul & Penulis: Tidak boleh kosong dan maksimal 255 karakter.\n
+                - Deskripsi: Tidak boleh kosong.\n
+                - Kategori: Harus dipilih dari daftar yang tersedia.\n
+                - Tahun Terbit: Harus berupa angka antara 1950 hingga " . date('Y') . ".\n
+                - Stok: Harus angka minimal 1 (tidak boleh negatif).\n
+                Silakan periksa kembali dan coba lagi."
+            ])->withInput();
         }
     }
 
